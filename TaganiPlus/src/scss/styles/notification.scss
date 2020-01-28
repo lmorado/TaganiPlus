@@ -1,0 +1,29 @@
+.custom-nav {
+    .icon-bell,
+    .icon-bell {
+        margin: 0 20px;
+        position: relative;
+    }
+    .icon-bell {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .badge-secondary {
+        position: absolute;
+        top:-8px;
+        right: -10px;
+        background-color: #ff5252;
+        color: #fff;
+        display: inline-block;
+        min-width: 10px;
+        padding: 3px 7px;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        border-radius: 10px;
+    }
+}

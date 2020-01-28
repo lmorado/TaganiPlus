@@ -1,0 +1,170 @@
+$color-true-red: #a22727;
+$breadcrumb-color-red: #950e0e;
+$color-dark-red: #880404;
+$color-darker-red: #580606;
+$button-color-red: #480000;
+$button-color-hover: #410000;
+$row-color-1: $color-true-red;
+$row-color-2: #f3f3f3;
+$row-color-3: $color-dark-red;
+$button-color-transparent: #880404;
+/*CSS FOR RESPONSIVE TABLE Start 
+	*********************************/
+.responsive-table {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  thead {
+    @media only screen and (max-width: 1200px) {
+      display: none;
+    }
+  }
+  tr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: block;
+    @media only screen and (min-width: 1200px) {
+      display: table-row;
+      border-bottom-width: 1px;
+      margin-bottom: 0;
+      &:nth-child(even) {
+        background: #fafafa;
+      }
+    }
+  }
+  th,
+  td {
+    padding: 5px;
+  }
+  th {
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+
+  td {
+    display: flex;
+    font-size: 13px;
+    border-bottom: 1px dotted#ddd;
+
+    &:last-child {
+      border-bottom: 2px dotted #ddd;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      display: table-cell;
+      font-size: 14px;
+      border-bottom: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .responsive-item {
+    text-align: right;
+    float: right;
+  }
+
+  .responsive-label {
+    width: 50%;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .responsive-label {
+    display: none;
+  }
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+input:disabled {
+  background: #dddddd;
+}
+
+input.red-disable:disabled {
+  background: #dddddd;
+  color: #dddddd;
+}
+
+input.red-disable:disabled::placeholder {
+  color: #dddddd;
+}
+
+.btn-danger.disabled,
+.btn-danger:disabled {
+  background-color: #f2f2f2 !important;
+  border-color: #f86c6b !important;
+  color: #880404;
+  cursor: not-allowed;
+}
+
+.main {
+  background: #ebeff2;
+}
+
+input {
+  border-radius: 0 !important;
+
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+.input-group-text {
+  border-radius: 0 !important;
+  background: none !important;
+  cursor: pointer;
+
+  i {
+    margin-top: 0 !important;
+    color: #8f9ba6 !important;
+  }
+}
+
+.col-right-border {
+  border-right: 1px solid #aaa;
+}
+
+.has-error {
+  border: 1px solid #fa3a3a;
+}
+
+.ml-15 {
+  @media only screen and (min-width: 1100px) {
+    margin-left: 25px;
+  }
+
+  @media only screen and (min-width: 1001px) and (max-width: 1100px) {
+    margin-left: 20px;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    margin-left: 20px;
+  }
+}
+
+.btn {
+  color: #fff;
+  background-color: $button-color-red;
+  border-color: $button-color-red;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: $button-color-hover;
+
+    .fa-refresh {
+      color: #fff;
+    }
+  }
+}
+
+.btn-group > .btn {
+  background: transparent !important;
+  color: #000 !important;
+}
