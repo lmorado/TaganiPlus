@@ -4,6 +4,8 @@ $light-green: #61A26A;
 $dark-gray: #282828;
 $true-gray: #303030;
 $light-gray: #F0EEE4;
+$champagne: #f7e7ce;
+$white: #ffffff;
 $row-color-1: $dark-green;
 $row-color-2: #f3f3f3;
 $row-color-3: $light-green;
@@ -98,8 +100,8 @@ input.green-disable:disabled::placeholder {
 .btn-danger.disabled,
 .btn-danger:disabled {
   background-color: #f2f2f2 !important;
-  border-color: #61A26A !important;
-  color: #216438;
+  border-color: $light-green !important;
+  color: $dark-green;
   cursor: not-allowed;
 }
 
@@ -132,7 +134,7 @@ input {
 }
 
 .has-error {
-  border: 1px solid #61A26A;
+  border: 1px solid $light-green;
 }
 
 .ml-15 {
@@ -150,7 +152,7 @@ input {
 }
 
 .btn {
-  color: #fff;
+  color: $white;
   background-color: $true-gray;
   border-color: $true-gray;
   border-radius: 3px;
@@ -159,7 +161,7 @@ input {
     background-color: $dark-gray;
 
     .fa-refresh {
-      color: #fff;
+      color: $white;
     }
   }
 }
