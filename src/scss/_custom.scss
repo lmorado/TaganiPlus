@@ -1,13 +1,13 @@
-$color-true-red: #a22727;
-$breadcrumb-color-red: #950e0e;
-$color-dark-red: #880404;
-$color-darker-red: #580606;
-$button-color-red: #480000;
-$button-color-hover: #410000;
-$row-color-1: $color-true-red;
+$dark-green: #216438;
+$true-green:  #337247;
+$light-green: #61A26A;
+$dark-gray: #282828;
+$true-gray: #303030;
+$light-gray: #F0EEE4;
+$row-color-1: $dark-green;
 $row-color-2: #f3f3f3;
-$row-color-3: $color-dark-red;
-$button-color-transparent: #880404;
+$row-color-3: $light-green;
+$button-color-transparent: #04880b;
 /*CSS FOR RESPONSIVE TABLE Start 
 	*********************************/
 .responsive-table {
@@ -86,20 +86,20 @@ input:disabled {
   background: #dddddd;
 }
 
-input.red-disable:disabled {
+input.green-disable:disabled {
   background: #dddddd;
   color: #dddddd;
 }
 
-input.red-disable:disabled::placeholder {
+input.green-disable:disabled::placeholder {
   color: #dddddd;
 }
 
 .btn-danger.disabled,
 .btn-danger:disabled {
   background-color: #f2f2f2 !important;
-  border-color: #f86c6b !important;
-  color: #880404;
+  border-color: #61A26A !important;
+  color: #216438;
   cursor: not-allowed;
 }
 
@@ -132,7 +132,7 @@ input {
 }
 
 .has-error {
-  border: 1px solid #fa3a3a;
+  border: 1px solid #61A26A;
 }
 
 .ml-15 {
@@ -151,12 +151,12 @@ input {
 
 .btn {
   color: #fff;
-  background-color: $button-color-red;
-  border-color: $button-color-red;
+  background-color: $true-gray;
+  border-color: $true-gray;
   border-radius: 3px;
 
   &:hover {
-    background-color: $button-color-hover;
+    background-color: $dark-gray;
 
     .fa-refresh {
       color: #fff;
