@@ -1,7 +1,7 @@
 export default {
   items: [
     {
-      name: 'Drinks',
+      name: 'Dashboard',
       url: '/drinks',
       id: 'Drinks',
       icon: 'icon-cup',
@@ -19,8 +19,29 @@ export default {
       ],
       value: 'Drksz',
     },
+
     {
-      name: 'Test Route 2',
+      name: 'Inputs',
+      id: 'Equipments',
+      url: '/equipments',
+      icon: 'icon-rocket',
+      children: [
+        {
+          name: 'Basic Equipments',
+          url: '/equipments/basic',
+          icon: 'icon-cup',
+        },
+        {
+          name: 'Manage Equipments',
+          url: '/equipments/manage',
+          icon: 'icon-list',
+        },
+      ],
+      value: 'Drksz',
+    },
+
+    {
+      name: 'Crops',
       id: 'Tr2',
       url: '/tr-2',
       icon: 'icon-cursor',
@@ -43,22 +64,16 @@ export default {
         }
       ]
     },
+    
     {
-      name: 'Basic Equipments',
-      id: 'equipments',
-      url: '/equipments',
-      icon: 'icon-rocket',
-      value: 'equipments',
-    },
-    {
-      name: 'Activities',
+      name: 'Finance',
       id: 'activities',
       url: '/activities',
       icon: 'icon-camrecorder',
       value: 'activities',
     },
     {
-      name: 'Financial Reports',
+      name: 'Reports',
       id: 'reports',
       url: '/reports',
       icon: 'icon-paper-clip',

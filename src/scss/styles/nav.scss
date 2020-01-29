@@ -6,6 +6,7 @@ $true-gray: #303030;
 $light-gray: #F0EEE4;
 $champagne: #f7e7ce;
 $white: #ffffff;
+$border-gray: #DADCE0;
 
 /* Custom Navigation design */
 .custom-nav {
@@ -19,7 +20,7 @@ $white: #ffffff;
   .dropdown {
     .btn-secondary {
       border: 0;
-      color: $white;
+      color: $light-green;
     }
   }
 
@@ -73,7 +74,7 @@ $white: #ffffff;
 
 /* Header design  */
 .app-header {
-  border-bottom: 0.5px solid #DADCE0;
+  border-bottom: 0.5px solid $border-gray;
   background: $white;
 }
 
@@ -125,23 +126,18 @@ $white: #ffffff;
   background: $dark-green; /* Old browsers */
   background: -moz-linear-gradient(-45deg, $dark-green 0%, $true-green 63%, $light-green 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(-45deg, $dark-green 0%, $true-green 63%, $light-green 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(
-    135deg,
-    $dark-green 0%,
-    $true-green 63%,
-    $light-green 100%
-  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: linear-gradient(135deg, $dark-green 0%, $true-green 63%, $light-green 100% ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2d0001', endColorstr='#440000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
   .nav-link {
-    color: #e4d4d4;
+    color: $champagne;
     font-size: 0.96rem;
 
     &.active {
       border-left: 5px solid $dark-green;
-      color: $dark-green;
-      background: #f4f8fb;
-      border-top: 1px solid #eee;
+      color: $champagne;
+      background: $light-green;
+      border-top: 1px solid $dark-green;
       border-bottom: 1px solid $dark-green;
       font-weight: 500;
     }
@@ -156,16 +152,12 @@ $white: #ffffff;
 
   .nav-dropdown {
     &.open {
-      background: transparent;
-      color: #004816;
+      background: $dark-green;
+      color: $dark-green;
 
       .nav-link {
-        color: #b38d8d;
+        color: $champagne;
         border-left: 0;
-      }
-
-      .nav-link:hover {
-        color: $white;
       }
     }
   }

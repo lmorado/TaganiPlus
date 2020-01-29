@@ -41,8 +41,7 @@ class DefaultHeader extends Component {
 			<React.Fragment>
 				<AppSidebarToggler className="d-lg-none" display="md" mobile />
 				<a className="navbar-brand" href="#">
-					<img src="https://www.canvasbackwine.com/assets/images/icon-acerage.svg" style={{ width: 80, height: 100 }} />
-					
+					<img src="https://tagani.ph/wp-content/uploads/2019/12/tagani-tm-copy.png" style={{ marginLeft: 65, width: 121, height: 42 }} />
 				</a>
 				<Nav className="ml-auto custom-nav" navbar>
 					<Dropdown isOpen={isOpen} toggle={this.toggle} style={{ margin: '0px 5px', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: '5px' }}>
