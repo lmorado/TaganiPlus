@@ -15,6 +15,8 @@ import {
 	Button,
 	Row,
 } from 'reactstrap';
+
+import CurrencyInput from './CurrencyInput'
 import { createDrinks, resetCreateDrinks } from '../../../actions/drinks/createDrinks'
 
 class ManageEquipments extends Component {
@@ -184,14 +186,7 @@ class ManageEquipments extends Component {
 												<InputGroupText>
 													<i className="icon-paypal"></i>
 												</InputGroupText>
-												<Input
-													type='number'
-													name="cost"
-													maxLength="30"
-													value={cost}
-													onChange={this.handleChange}
-													className={!cost && isSubmitted ? 'has-error' : ''}
-												/>
+												<CurrencyInput placeholder="PHP 0.00" type="text" />
 											</InputGroupAddon>
 										</InputGroup>
 									</FormGroup>
