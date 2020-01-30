@@ -2,24 +2,11 @@ export default {
   items: [
     {
       name: 'Dashboard',
-      url: '/drinks',
+      url: '/main',
       id: 'Drinks',
       icon: 'icon-cup',
-      children: [
-        {
-          name: 'Create',
-          url: '/drinks/create',
-          icon: 'icon-pencil',
-        },
-        {
-          name: 'Drinks',
-          url: '/drinks/list',
-          icon: 'icon-list',
-        },
-      ],
       value: 'Drksz',
     },
-
     {
       name: 'Inputs',
       id: 'Equipments',
@@ -28,13 +15,13 @@ export default {
       children: [
         {
           name: 'Basic Equipments',
-          url: '/equipments/basic',
-          icon: 'icon-cup',
+          url: '/equipments/list',
+          icon: 'icon-list',
         },
         {
           name: 'Manage Equipments',
           url: '/equipments/manage',
-          icon: 'icon-list',
+          icon: 'icon-puzzle',
         },
       ],
       value: 'Drksz',

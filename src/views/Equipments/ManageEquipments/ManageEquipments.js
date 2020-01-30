@@ -17,7 +17,7 @@ import {
 } from 'reactstrap';
 
 import CurrencyInput from './CurrencyInput'
-import { createDrinks, resetCreateDrinks } from '../../../actions/drinks/createDrinks'
+import { createEquipments, resetCreateEquipments } from '../../../actions/equipments/createEquipments'
 
 class ManageEquipments extends Component {
 	
@@ -55,7 +55,7 @@ class ManageEquipments extends Component {
 
 			setTimeout(() => {
 				this.setState({ showMsg: false })
-				this.props.resetCreateDrinks()
+				this.props.resetCreateEquipments()
 			}, 3000)
 		}
 	}
@@ -66,7 +66,7 @@ class ManageEquipments extends Component {
 		})
 	}
 
-	handleCreateDrink = () => {
+	handleCreateEquipment = () => {
 
 		const {
 			equipmentID,
@@ -98,7 +98,7 @@ class ManageEquipments extends Component {
 		})
 
 		if (equipmentID && equipmentName && vendorID && cost && quantity && measurement && equipmentType && purchaseDate) {
-			this.props.createDrinks(equipment)
+			this.props.createEquipments(equipment)
 		}
 		else {
 			this.setState({
@@ -155,7 +155,7 @@ class ManageEquipments extends Component {
 											</InputGroupAddon>
 										</InputGroup>
 									</FormGroup>
-									<Col size='5'/>
+									<Col/>
 									<FormGroup>
 										<Label for="vendorID"> Vendor :  </Label>
 										<InputGroup>
@@ -186,7 +186,11 @@ class ManageEquipments extends Component {
 												<InputGroupText>
 													<i className="icon-paypal"></i>
 												</InputGroupText>
-												<CurrencyInput placeholder="PHP 0.00" type="text" />
+												<CurrencyInput
+													type="text" 
+													name="cost"
+													placeholder="PHP 0.00"
+												/>
 											</InputGroupAddon>
 										</InputGroup>
 									</FormGroup>
@@ -305,14 +309,14 @@ class ManageEquipments extends Component {
 								<Row md={`6`} style={{ marginLeft: 190, marginRight: 190 }}>
 									{showMsg &&
 										<Alert color="success">
-											Drink successfully added
+											Equipment successfully added.
                                 		</Alert>
 									}
 									<div className="align-right">
 										<Button
 											color="success"
 											className="btn-spacing"
-											onClick={this.handleCreateDrink}
+											onClick={this.handleCreateEquipment}
 											disabled={loading}
 											style={{ float: 'right' }}>
 											<i className="fa fa-unlock-alt fa-lg" /> Save
@@ -329,22 +333,22 @@ class ManageEquipments extends Component {
 }
 
 const mapStateToProps = state => ({
-	error: state.equipment.createDrinks.error,
-	success: state.equipment.createDrinks.success,
-	response: state.equipment.createDrinks.response,
-	loading: state.equipment.createDrinks.loading,
+	error: state.equipment.createEquipments.error,
+	success: state.equipment.createEquipments.success,
+	response: state.equipment.createEquipments.response,
+	loading: state.equipment.createEquipments.loading,
 })
 
 const mapDispatchToProps = dispatch => ({
-	createDrinks: (equipment) => dispatch(createDrinks(equipment)),
-	resetCreateDrinks: () => dispatch(resetCreateDrinks())
+	createEquipments: (equipment) => dispatch(createEquipments(equipment)),
+	resetCreateEquipments: () => dispatch(resetCreateEquipments())
 })
 
-PropTypes.CreateDrinks = {
+PropTypes.CreateEquipments = {
 	error: PropTypes.bool.isRequired,
 	success: PropTypes.object.isRequired,
 	response: PropTypes.bool,
-	createDrinks: PropTypes.func,
+	createEquipments: PropTypes.func,
 }
 
 export default ManageEquipments
