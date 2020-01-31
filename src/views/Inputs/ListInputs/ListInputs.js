@@ -46,12 +46,16 @@ class ListInputs extends Component {
       dataSort : 'yearAscending',
       //create props
 			inputName: '',
-			vendorID: '',
+      model: '',
 			cost: '',
-			quantity: '',
-			inputType: '',
-			purchaseDate: '',
+      category: '',
 			acquiredDate: '',
+      vendor: '',
+      inputID: '',
+			quantity: '',
+      measurement: '',
+      expiredDate: '',
+      description: '',
 			submitted: false,
 			showMsg: false
     }
@@ -70,13 +74,17 @@ class ListInputs extends Component {
 		const { success } = this.props
 		if ((prevProps.success !== true && success === true)) {
 			this.setState({
-				inputName: '',
-				vendorID: '',
-				cost: 0,
-				quantity: 1,
-				inputType: '',
-				purchaseDate: 1990,
-				acquiredDate: 2020,
+        inputName: '',
+        model: '',
+        cost: '',
+        category: '',
+        acquiredDate: '',
+        vendor: '',
+        inputID: '',
+        quantity: '',
+        measurement: '',
+        expiredDate: '',
+        description: '',
 				isSubmitted: false,
 				showMsg: true,
 			})
@@ -90,30 +98,38 @@ class ListInputs extends Component {
   handleCreateInput = () => {
 
 		const {
-			inputName,
-			vendorID,
+      inputName,
+      model,
 			cost,
+      category,
+			acquiredDate,
+      vendor,
+      inputID,
 			quantity,
-			inputType,
-			purchaseDate,
-			acquiredDate
+      measurement,
+      expiredDate,
+      description,
 		} = this.state
 
 		const input = {
 			inputName: inputName,
-			vendorID: vendorID,
+      model: model,
 			cost: cost,
-			quantity: quantity,
-			inputType: inputType,
-			purchaseDate: purchaseDate,
+			category: category,
 			acquiredDate: acquiredDate,
+			vendor: vendor,
+      inputID: inputID,
+			quantity: quantity,
+      measurement: measurement,
+			expiredDate: expiredDate,
+      description: description,
 		}
 
 		this.setState({
 			isSubmitted: true
 		})
 
-		if (inputName && vendorID && cost && quantity && inputType && purchaseDate && acquiredDate) {
+		if ( inputName && model && cost && category && acquiredDate && vendor && inputID && quantity && measurement && expiredDate && description) {
 			this.props.createInputs(input)
 		}
 		else {
@@ -146,7 +162,7 @@ class ListInputs extends Component {
               <th>#</th>
               <th className="text-center">Name</th>
               <th className="text-center">Quantity</th>
-              <th className="text-center">Date Acquired</th>
+              <th className="text-center">Acquired Date</th>
               <th className="text-center">Manage</th>
             </tr>
           </thead>
@@ -170,7 +186,7 @@ class ListInputs extends Component {
                     <div className="responsive-item text-right">{data.quantity}</div>
                   </td>
                   <td>
-                    <div className="responsive-label"> Date Acquired  </div>
+                    <div className="responsive-label"> Acquired Date  </div>
                     <div className="responsive-item text-center">{data.acquiredDate}</div>
                   </td>
                   <td>
@@ -200,13 +216,17 @@ class ListInputs extends Component {
 
     //create
     const {
-			inputName,
-			vendorID,
+      inputName,
+      model,
 			cost,
-			quantity,
-			inputType,
-			purchaseDate,
+      category,
 			acquiredDate,
+      vendor,
+      inputID,
+			quantity,
+      measurement,
+      expiredDate,
+      description,
 			isSubmitted,
 			showMsg
     } = this.state
@@ -280,13 +300,12 @@ class ListInputs extends Component {
                                   <InputGroup>
                                     <InputGroupAddon addonType="append">
                                       <InputGroupText>
-                                        <i className="icon-screen-smartphone"></i>
+                                        <i className="icon-screen-desktop"></i>
                                       </InputGroupText>
                                       <Input
                                         type='text'
                                         name="inputName"
-                                        placeholder={'Name of the Product'}
-                                        maxLength="30"
+                                        placeholder={'Product Name'}
                                         value={inputName}
                                         onChange={this.handleChange}
                                         className={!inputName && isSubmitted ? 'has-error' : ''}
@@ -295,20 +314,54 @@ class ListInputs extends Component {
                                   </InputGroup>
                                 </FormGroup>
                                 <FormGroup>
-                                  <Label for="inputType"> Category :  </Label>
+                                  <Label for="model"> Model :  </Label>
+                                  <InputGroup>
+                                    <InputGroupAddon addonType="append">
+                                      <InputGroupText>
+                                        <i className="icon-screen-smartphone"></i>
+                                      </InputGroupText>
+                                      <Input
+                                        type='text'
+                                        name="model"
+                                        placeholder={'e.g. Toyota'}
+                                        value={model}
+                                        onChange={this.handleChange}
+                                        className={!model && isSubmitted ? 'has-error' : ''}
+                                      />
+                                    </InputGroupAddon>
+                                  </InputGroup>
+                                </FormGroup>
+                                <FormGroup>
+                                  <Label for="cost"> Cost :  </Label>
                                   <InputGroup>
                                     <InputGroupAddon addonType="append" style={{height:'35px'}}>
                                       <InputGroupText>
                                         <i className="icon-paypal"></i>
                                       </InputGroupText>
+                                      <CurrencyInput
+                                        name="cost"
+                                        placeholder="PHP 0.00"
+                                        height="30"
+                                        onChange={this.handleChange}
+                                        className={!cost && isSubmitted ? 'has-error' : ''}
+                                      />
+                                    </InputGroupAddon>
+                                  </InputGroup>
+                                </FormGroup>
+                                <FormGroup>
+                                  <Label for="category"> Category :  </Label>
+                                  <InputGroup>
+                                    <InputGroupAddon addonType="append">
+                                      <InputGroupText>
+                                        <i className="icon-list"></i>
+                                      </InputGroupText>
                                       <Input
                                         type='select'
-                                        name="inputType"
-                                        placeholder={'Type of Input'}
-                                        maxLength="30"
-                                        value={inputType}
+                                        name="category"
+                                         
+                                        value={category}
                                         onChange={this.handleChange}
-                                        className={!inputType && isSubmitted ? 'has-error' : ''}
+                                        className={!category && isSubmitted ? 'has-error' : ''}
                                       >
                                         <option>Tool</option>
                                         <option>Tractor</option>
@@ -318,7 +371,7 @@ class ListInputs extends Component {
                                   </InputGroup>
                                 </FormGroup>
                                 <FormGroup>
-                                  <Label for="purchaseDate"> Date Purchased :  </Label>
+                                  <Label for="acquiredDate"> Date Acquired :  </Label>
                                   <InputGroup>
                                     <InputGroupAddon addonType="append">
                                       <InputGroupText>
@@ -326,12 +379,10 @@ class ListInputs extends Component {
                                       </InputGroupText>
                                       <Input
                                         type='date'
-                                        name="purchaseDate"
-                                        // placeholder={'11/25/1671'}
-                                        maxLength="30"
-                                        value={purchaseDate}
+                                        name="acquiredDate"
+                                        value={acquiredDate}
                                         onChange={this.handleChange}
-                                        className={!purchaseDate && isSubmitted ? 'has-error' : ''}
+                                        className={!acquiredDate && isSubmitted ? 'has-error' : ''}
                                       />
                                     </InputGroupAddon>
                                   </InputGroup>
@@ -339,7 +390,25 @@ class ListInputs extends Component {
                               </div>
                               <div style={{ position:'relative', marginLeft:'auto', marginRight:'auto' }}>
                                 <FormGroup>
-                                  <Label for="vendorID"> ID Number :  </Label>
+                                  <Label for="vendor"> Vendor :  </Label>
+                                  <InputGroup>
+                                    <InputGroupAddon addonType="append">
+                                      <InputGroupText>
+                                        <i className="icon-user"></i>
+                                      </InputGroupText>
+                                      <Input
+                                        type='text'
+                                        name="vendor"
+                                        placeholder={'Vendor Name'}
+                                        value={vendor}
+                                        onChange={this.handleChange}
+                                        className={!vendor && isSubmitted ? 'has-error' : ''}
+                                      />
+                                    </InputGroupAddon>
+                                  </InputGroup>
+                                </FormGroup>
+                                <FormGroup>
+                                  <Label for="inputID"> Input ID :  </Label>
                                   <InputGroup>
                                     <InputGroupAddon addonType="append">
                                       <InputGroupText>
@@ -347,49 +416,68 @@ class ListInputs extends Component {
                                       </InputGroupText>
                                       <Input
                                         type='number'
-                                        name="vendorID"
-                                        placeholder={'0'}
-                                        maxLength="30"
-                                        value={vendorID}
+                                        name="inputID"
+                                        placeholder={'123-546'}
+                                        value={inputID}
                                         onChange={this.handleChange}
-                                        className={!vendorID && isSubmitted ? 'has-error' : ''}
+                                        className={!inputID && isSubmitted ? 'has-error' : ''}
                                       />
                                     </InputGroupAddon>
                                   </InputGroup>
                                 </FormGroup>
                                 <FormGroup>
-                                  <Label for="cost"> Model :  </Label>
+                                  <Label for="quantity"> Quantity :  </Label>
                                   <InputGroup>
                                     <InputGroupAddon addonType="append">
                                       <InputGroupText>
-                                        <i className="icon-screen-desktop"></i>
+                                        <i className="icon-grid"></i>
                                       </InputGroupText>
                                       <Input
-                                        type='text'
-                                        name="cost"
-                                        placeholder={'Product Model'}
-                                        maxLength="30"
-                                        value={cost}
+                                        type='number'
+                                        name="quantity"
+                                        placeholder={'0'}
+                                        value={quantity}
                                         onChange={this.handleChange}
-                                        className={!cost && isSubmitted ? 'has-error' : ''}
+                                        className={!quantity && isSubmitted ? 'has-error' : ''}
                                       />
                                     </InputGroupAddon>
                                   </InputGroup>
                                 </FormGroup>
                                 <FormGroup>
-                                  <Label for="acquiredDate"> Date Acquired :  </Label>
+                                  <Label for="measurement"> Measurement :  </Label>
                                   <InputGroup>
                                     <InputGroupAddon addonType="append">
                                       <InputGroupText>
-                                        <i className="icon-paper-clip"></i>
+                                        <i className="icon-speedometer"></i>
+                                      </InputGroupText>
+                                      <Input
+                                        type='select'
+                                        name="measurement"
+                                        value={measurement}
+                                        onChange={this.handleChange}
+                                        className={!measurement && isSubmitted ? 'has-error' : ''}
+                                      >
+                                        <option>KG</option>
+                                        <option>PCS</option>
+                                        <option>L</option>
+                                      </Input>
+                                    </InputGroupAddon>
+                                  </InputGroup>
+                                </FormGroup>
+                                <FormGroup>
+                                  <Label for="expiredDate"> Expiration Date :  </Label>
+                                  <InputGroup>
+                                    <InputGroupAddon addonType="append">
+                                      <InputGroupText>
+                                        <i className="icon-calendar"></i>
                                       </InputGroupText>
                                       <Input
                                         type='date'
-                                        name="acquiredDate"
-                                        maxLength="30"
-                                        value={acquiredDate}
+                                        name="expiredDate"
+                                         
+                                        value={expiredDate}
                                         onChange={this.handleChange}
-                                        className={!acquiredDate && isSubmitted ? 'has-error' : ''}
+                                        className={!expiredDate && isSubmitted ? 'has-error' : ''}
                                       />
                                     </InputGroupAddon>
                                   </InputGroup>
@@ -399,18 +487,18 @@ class ListInputs extends Component {
                             <Row>
                               <div style={{ position:'relative', marginLeft:'auto', marginRight:'auto' }}>
                                 < FormGroup>
-                                  <Label for="quantity"> Description :  </Label>
+                                  <Label for="description"> Description :  </Label>
                                   <InputGroup>
-                                    <InputGroupAddon addonType="append" style={{height:'100px', width:'300px'}}>
+                                    <InputGroupAddon addonType="append" style={{height:'50px', width:'400px'}}>
                                       <InputGroupText>
                                         <i className="icon-paper-clip"></i>
                                       </InputGroupText>
                                       <Input
                                         type='textarea'
-                                        name="quantity"
-                                        value={quantity}
+                                        name="description"
+                                        value={description}
                                         onChange={this.handleChange}
-                                        className={!quantity && isSubmitted ? 'has-error' : ''}
+                                        className={!description && isSubmitted ? 'has-error' : ''}
                                       />
                                     </InputGroupAddon>
                                   </InputGroup>
