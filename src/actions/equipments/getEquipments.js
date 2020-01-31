@@ -16,10 +16,10 @@ const getEquipmentsSuccess = (response) => ({
     type: GET_EQUIPMENTS_SUCCESS, payload: response
 })
 
-export const getEquipments = (name = '', vendor = '', cost = '', year = '', sortOrder='') => {
+export const getEquipments = (name = '', sortOrder='', year = '') => {
     return async dispatch => {
         dispatch(getEquipmentsRequest())
-        let storedEquipments = { name : name , vendor : vendor, cost : cost, year : year, sortOrder : sortOrder}
+        let storedEquipments = { name : name , sortOrder : sortOrder, year : year}
         if (!storedEquipments) {
             const errormsg = 'Error 500'
             dispatch(getEquipmentsFailed(errormsg))

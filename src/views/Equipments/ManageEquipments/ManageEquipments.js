@@ -190,6 +190,9 @@ class ManageEquipments extends Component {
 													type="text" 
 													name="cost"
 													placeholder="PHP 0.00"
+													value={cost}
+													onChange={this.handleChange}
+													className={!cost && isSubmitted ? 'has-error' : ''}
 												/>
 											</InputGroupAddon>
 										</InputGroup>

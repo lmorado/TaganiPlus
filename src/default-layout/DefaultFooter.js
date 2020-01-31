@@ -10,8 +10,8 @@ const defaultProps = {};
 const  DefaultFooter = () => {
     return (
       <React.Fragment>
-        <span> Test Website 123 &copy; 2019.</span>
-        <span className="ml-auto">Powered by Test Website 123</span>
+        <span> Tagani Philippines &copy; 2020.</span>
+        <span className="ml-auto">Powered by Tagani (Wordpress)</span>
       </React.Fragment>
     );
 }

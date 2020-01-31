@@ -14,15 +14,10 @@ export default {
       icon: 'icon-rocket',
       children: [
         {
-          name: 'Basic Equipments',
+          name: 'Manage Equipments',
           url: '/equipments/list',
           icon: 'icon-list',
-        },
-        {
-          name: 'Manage Equipments',
-          url: '/equipments/manage',
-          icon: 'icon-puzzle',
-        },
+        }
       ],
       value: 'Drksz',
     },
@@ -30,18 +25,18 @@ export default {
     {
       name: 'Crops',
       id: 'Tr2',
-      url: '/tr-2',
+      url: '/drinks',
       icon: 'icon-cursor',
       value: 'tr-2',
       children: [
         {
           name: 'Test Route 2 Ch1',
-          url: '/tr-2/a',
+          url: '/drinks/create',
           icon: 'icon-puzzle',
         },
         {
           name: 'Test Route 2 Ch2',
-          url: '/tr-2/b',
+          url: '/drinks/list',
           icon: 'icon-puzzle',
         },
         {
