@@ -9,13 +9,28 @@ export default {
     },
     {
       name: 'Inputs',
-      id: 'Equipments',
-      url: '/equipments',
+      id: 'Inputs',
+      url: '/inputs',
       icon: 'icon-rocket',
       children: [
         {
-          name: 'Manage Equipments',
-          url: '/equipments/list',
+          name: 'Manage Inputs',
+          url: '/inputs/list',
+          icon: 'icon-list',
+        },
+        {
+          name: 'Growing Media',
+          url: '/inputs/media',
+          icon: 'icon-list',
+        },
+        {
+          name: 'Fertilizer',
+          url: '/inputs/fertilizer',
+          icon: 'icon-list',
+        },
+        {
+          name: 'Seeds',
+          url: '/inputs/seeds',
           icon: 'icon-list',
         }
       ],
@@ -28,25 +43,7 @@ export default {
       url: '/drinks',
       icon: 'icon-cursor',
       value: 'tr-2',
-      children: [
-        {
-          name: 'Test Route 2 Ch1',
-          url: '/drinks/create',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Test Route 2 Ch2',
-          url: '/drinks/list',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Test Route 2 Ch3',
-          url: '/tr-2/c',
-          icon: 'icon-puzzle',
-        }
-      ]
     },
-    
     {
       name: 'Finance',
       id: 'activities',

@@ -1,8 +1,8 @@
-import { GET_EQUIPMENTS_YEAR_EXPIRE_REQUEST, GET_EQUIPMENTS_YEAR_EXPIRE_FAILED, GET_EQUIPMENTS_YEAR_EXPIRE_SUCCESS } from '../../constants/equipments'
+import { GET_INPUTS_YEAR_ACQUIRED_REQUEST, GET_INPUTS_YEAR_ACQUIRED_FAILED, GET_INPUTS_YEAR_ACQUIRED_SUCCESS } from '../../constants/inputs'
 import { getLocalStorage } from '../../utils/localStorage'
 
 
-let drinkList = getLocalStorage('equipmentsList') ? JSON.parse(localStorage.getItem('equipmentsList')) : []
+let drinkList = getLocalStorage('inputsList') ? JSON.parse(localStorage.getItem('inputsList')) : []
 let yearItems = []
 
 yearItems = drinkList.map(x=> {
@@ -16,27 +16,27 @@ const initialState = {
 }
 
 
-const expDate = (state = initialState, action) => {
+const acquiredDate = (state = initialState, action) => {
     switch (action.type) {
-        case GET_EQUIPMENTS_YEAR_EXPIRE_REQUEST:
+        case GET_INPUTS_YEAR_ACQUIRED_REQUEST:
             return {
                 ...state,
                 loading: true,
                 success: false,
                 error: null,
             }
-        case GET_EQUIPMENTS_YEAR_EXPIRE_FAILED:
+        case GET_INPUTS_YEAR_ACQUIRED_FAILED:
             return {
                 ...state,
                 loading: false,
                 error: action.payload
             }
-        case GET_EQUIPMENTS_YEAR_EXPIRE_SUCCESS:
+        case GET_INPUTS_YEAR_ACQUIRED_SUCCESS:
 
-            let equipments = getLocalStorage('equipmentsList') ? JSON.parse(localStorage.getItem('equipmentsList')) : []
-            let expDate = []
+            let inputs = getLocalStorage('inputsList') ? JSON.parse(localStorage.getItem('inputsList')) : []
+            let acquiredDate = []
 
-            expDate = equipments.map(x=> {
+            acquiredDate = inputs.map(x=> {
                 return x.yearMade
             })
 
@@ -45,11 +45,11 @@ const expDate = (state = initialState, action) => {
                 loading: false,
                 success: true,
                 error: false,
-                data: [...new Set(expDate)]
+                data: [...new Set(acquiredDate)]
             }
         default:
             return state
     }
 }
 
-export default expDate
+export default acquiredDate

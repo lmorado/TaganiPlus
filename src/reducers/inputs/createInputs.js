@@ -1,4 +1,4 @@
-import { CREATE_EQUIPMENTS_FAILED, CREATE_EQUIPMENTS_REQUEST, CREATE_EQUIPMENTS_SUCCESS, RESET_CREATE_EQUIPMENTS } from '../../constants/equipments'
+import { CREATE_INPUTS_FAILED, CREATE_INPUTS_REQUEST, CREATE_INPUTS_SUCCESS, RESET_CREATE_INPUTS } from '../../constants/inputs'
 import { getLocalStorage, saveLocalStorage } from '../../utils/localStorage'
 
 
@@ -10,27 +10,27 @@ const initialState = {
 }
 
 
-const createEquipments = (state = initialState, action) => {
+const createInputs = (state = initialState, action) => {
     switch (action.type) {
-        case CREATE_EQUIPMENTS_REQUEST:
+        case CREATE_INPUTS_REQUEST:
             return {
                 ...state,
                 loading: true,
                 success: false,
                 error: null,
             }
-        case CREATE_EQUIPMENTS_FAILED:
+        case CREATE_INPUTS_FAILED:
             return {
                 ...state,
                 loading: false,
                 success: false,
                 error: action.payload
             }
-        case CREATE_EQUIPMENTS_SUCCESS:
-            //save the equipments in local storage
-            let equipments = getLocalStorage('equipmentsList') ? JSON.parse(localStorage.getItem('equipmentsList')) : []
-            equipments.push({id : Math.floor(1000 + Math.random() * 9000), ...action.payload})
-            saveLocalStorage('equipmentsList', equipments)
+        case CREATE_INPUTS_SUCCESS:
+            //save the inputs in local storage
+            let inputs = getLocalStorage('inputsList') ? JSON.parse(localStorage.getItem('inputsList')) : []
+            inputs.push({id : Math.floor(1000 + Math.random() * 9000), ...action.payload})
+            saveLocalStorage('inputsList', inputs)
 
             return {
                 ...state,
@@ -40,7 +40,7 @@ const createEquipments = (state = initialState, action) => {
                 response: action.payload
             }
 
-        case RESET_CREATE_EQUIPMENTS:
+        case RESET_CREATE_INPUTS:
 
             return initialState
 
@@ -49,4 +49,4 @@ const createEquipments = (state = initialState, action) => {
     }
 }
 
-export default createEquipments
+export default createInputs

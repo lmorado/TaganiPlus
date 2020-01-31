@@ -1,8 +1,8 @@
 
-import createEquipmentsReducer from './createEquipments';
-import { CREATE_EQUIPMENTS_REQUEST, CREATE_EQUIPMENTS_FAILED, CREATE_EQUIPMENTS_SUCCESS } from '../../constants/bottles'
+import createInputsReducer from './createInputs';
+import { CREATE_INPUTS_REQUEST, CREATE_INPUTS_FAILED, CREATE_INPUTS_SUCCESS } from '../../constants/bottles'
 
-describe('Create Equipments Reducer', () => {
+describe('Create Inputs Reducer', () => {
 
     let initialState = {
         loading: false,
@@ -13,7 +13,7 @@ describe('Create Equipments Reducer', () => {
 
     it('Should return default state', () => {
 
-        const newState = createEquipmentsReducer(undefined, {});
+        const newState = createInputsReducer(undefined, {});
         expect(newState).toEqual(initialState);
     });
 
@@ -27,8 +27,8 @@ describe('Create Equipments Reducer', () => {
             error: null,
         }
 
-        const newState = createEquipmentsReducer(undefined, {
-            type: CREATE_EQUIPMENTS_REQUEST,
+        const newState = createInputsReducer(undefined, {
+            type: CREATE_INPUTS_REQUEST,
             payload: undefined
         });
 
@@ -47,8 +47,8 @@ describe('Create Equipments Reducer', () => {
             error: payload
         }
 
-        const newState = createEquipmentsReducer(undefined, {
-            type: CREATE_EQUIPMENTS_FAILED,
+        const newState = createInputsReducer(undefined, {
+            type: CREATE_INPUTS_FAILED,
             payload: payload
         });
 

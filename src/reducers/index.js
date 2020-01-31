@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import drinks from './drinks'
-import equipments from './equipments'
+import inputs from './inputs'
 
 export default combineReducers({
     drinks,
-    equipments
+    inputs
 });

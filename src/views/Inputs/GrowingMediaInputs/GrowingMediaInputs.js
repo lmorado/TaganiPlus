@@ -4,14 +4,14 @@ import {
 } from 'reactstrap';
 
 
-class BasicEquipments extends Component {
+class GrowingMediaInputs extends Component {
 	render() {
 		return (
 			<Container fluid>
-				Basic Cup Equipment
+				Growing Media Inputs
 			</Container>
 		)
 	}
 }
 
-export default BasicEquipments
+export default GrowingMediaInputs

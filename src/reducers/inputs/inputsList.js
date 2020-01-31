@@ -1,52 +1,52 @@
-import { GET_EQUIPMENTS_REQUEST, GET_EQUIPMENTS_FAILED, GET_EQUIPMENTS_SUCCESS } from '../../constants/equipments'
+import { GET_INPUTS_REQUEST, GET_INPUTS_FAILED, GET_INPUTS_SUCCESS } from '../../constants/inputs'
 import { getLocalStorage } from '../../utils/localStorage'
 
 
 const initialState = {
     loading: false,
     error: false,
-    data: getLocalStorage('equipmentsList') ? JSON.parse(localStorage.getItem('equipmentsList')) : [],
+    data: getLocalStorage('inputsList') ? JSON.parse(localStorage.getItem('inputsList')) : [],
 }
 
 
-const equipmentsList = (state = initialState, action) => {
+const inputsList = (state = initialState, action) => {
     switch (action.type) {
-        case GET_EQUIPMENTS_REQUEST:
+        case GET_INPUTS_REQUEST:
             return {
                 ...state,
                 loading: true,
                 success: false,
                 error: null,
             }
-        case GET_EQUIPMENTS_FAILED:
+        case GET_INPUTS_FAILED:
             return {
                 ...state,
                 loading: false,
                 error: action.payload
             }
-        case GET_EQUIPMENTS_SUCCESS:
+        case GET_INPUTS_SUCCESS:
 
-            let equipments = getLocalStorage('equipmentsList') ? JSON.parse(localStorage.getItem('equipmentsList')) : []
-            let filteredEquipmentList = equipments
+            let inputs = getLocalStorage('inputsList') ? JSON.parse(localStorage.getItem('inputsList')) : []
+            let filteredInputList = inputs
 
             if(action.payload.year && action.payload.year !== 'all'){
-                filteredEquipmentList = filteredEquipmentList.filter(x=> parseInt(x.expDate) === parseInt(action.payload.year))
+                filteredInputList = filteredInputList.filter(x=> parseInt(x.acquiredDate) === parseInt(action.payload.year))
             }
 
             if(action.payload.name){
-                filteredEquipmentList = filteredEquipmentList.filter(x=>x.equipmentName.toLowerCase().includes(action.payload.name.toLowerCase()))
+                filteredInputList = filteredInputList.filter(x=>x.inputName.toLowerCase().includes(action.payload.name.toLowerCase()))
             }
 
             if(action.payload.vineyard && action.payload.vineyard !== 'all'){
-                filteredEquipmentList = filteredEquipmentList.filter(x=>x.vineyard === action.payload.vineyard)
+                filteredInputList = filteredInputList.filter(x=>x.vineyard === action.payload.vineyard)
             }
 
             if(action.payload.sortOrder) {
                 console.log('inside')
                 if(action.payload.sortOrder === 'yearDescending'){
-                    filteredEquipmentList =  filteredEquipmentList.sort((a,b) =>  {
-                            var nameA = parseInt(a.expDate); 
-                            var nameB = parseInt(b.expDate); 
+                    filteredInputList =  filteredInputList.sort((a,b) =>  {
+                            var nameA = parseInt(a.acquiredDate); 
+                            var nameB = parseInt(b.acquiredDate); 
                         
                             if (nameA > nameB) {
                                 return -1;
@@ -60,9 +60,9 @@ const equipmentsList = (state = initialState, action) => {
 
                 }
                 else if(action.payload.sortOrder === 'yearAscending'){
-                        filteredEquipmentList =  filteredEquipmentList.sort((a,b) =>  {
-                        var nameA = parseInt(a.expDate); 
-                        var nameB = parseInt(b.expDate); 
+                        filteredInputList =  filteredInputList.sort((a,b) =>  {
+                        var nameA = parseInt(a.acquiredDate); 
+                        var nameB = parseInt(b.acquiredDate); 
                        
                         if (nameA < nameB) {
                             return -1;
@@ -81,11 +81,11 @@ const equipmentsList = (state = initialState, action) => {
                 loading: false,
                 success: true,
                 error: false,
-                data: filteredEquipmentList
+                data: filteredInputList
             }
         default:
             return state
     }
 }
 
-export default equipmentsList
+export default inputsList

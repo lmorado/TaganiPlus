@@ -1,4 +1,4 @@
-import { GET_EQUIPMENT_REQUEST, GET_EQUIPMENT_FAILED, GET_EQUIPMENT_SUCCESS } from '../../constants/equipments'
+import { GET_INPUT_REQUEST, GET_INPUT_FAILED, GET_INPUT_SUCCESS } from '../../constants/inputs'
 import { getLocalStorage } from '../../utils/localStorage'
 
 
@@ -9,28 +9,28 @@ const initialState = {
 }
 
 
-const equipment = (state = initialState, action) => {
+const input = (state = initialState, action) => {
     switch (action.type) {
-        case GET_EQUIPMENT_REQUEST:
+        case GET_INPUT_REQUEST:
             return {
                 ...state,
                 loading: true,
                 success: false,
                 error: null,
             }
-        case GET_EQUIPMENT_FAILED:
+        case GET_INPUT_FAILED:
             return {
                 ...state,
                 loading: false,
                 error: action.payload
             }
-        case GET_EQUIPMENT_SUCCESS:
+        case GET_INPUT_SUCCESS:
 
-            let equipments = getLocalStorage('equipmentsList') ? JSON.parse(localStorage.getItem('equipmentsList')) : []
-            let filteredEquipmentList = equipments
+            let inputs = getLocalStorage('inputsList') ? JSON.parse(localStorage.getItem('inputsList')) : []
+            let filteredInputList = inputs
          
             if(action.payload) {
-                filteredEquipmentList = filteredEquipmentList.filter(x=> parseInt(action.payload) === parseInt(x.id))
+                filteredInputList = filteredInputList.filter(x=> parseInt(action.payload) === parseInt(x.id))
             }
 
             return {
@@ -38,7 +38,7 @@ const equipment = (state = initialState, action) => {
                 loading: false,
                 success: true,
                 error: false,
-                data: filteredEquipmentList.length > 0 ? filteredEquipmentList[0] : {}
+                data: filteredInputList.length > 0 ? filteredInputList[0] : {}
             }
             
         default:
@@ -46,4 +46,4 @@ const equipment = (state = initialState, action) => {
     }
 }
 
-export default equipment
+export default input

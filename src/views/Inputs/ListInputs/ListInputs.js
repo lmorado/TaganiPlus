@@ -24,18 +24,18 @@ import {
 
 //create
 import PropTypes from 'prop-types'
-import { createEquipments, resetCreateEquipments } from '../../../actions/equipments/createEquipments'
+import { createInputs, resetCreateInputs } from '../../../actions/inputs/createInputs'
 
 //list
 import { Link } from 'react-router-dom'
-import { getEquipments } from '../../../actions/equipments/getEquipments'
-import { getEquipmentsYearExpire } from '../../../actions/equipments/getYearsExpire'
+import { getInputs } from '../../../actions/inputs/getInputs'
+import { getInputsYearAcquired } from '../../../actions/inputs/getYearsAcquired'
 const sortOrder = [
-    { id: 'yearAscending', name: 'Expiration Date Ascending' },
-    { id: 'yearDescending', name: 'Expiration Date Descending' }
+    { id: 'yearAscending', name: 'Acquired Date Ascending' },
+    { id: 'yearDescending', name: 'Acquired Date Descending' }
 ]
 
-class ListEquipments extends Component {
+class ListInputs extends Component {
 
   constructor(props) {
     super(props)
@@ -45,14 +45,13 @@ class ListEquipments extends Component {
       searchYear: 'all',
       dataSort : 'yearAscending',
       //create props
-			equipmentName: '',
+			inputName: '',
 			vendorID: '',
-			cost: 0,
-			quantity: 1,
-			measurement: 0,
-			equipmentType: '',
-			purchaseDate: 1990,
-			expDate: 2020,
+			cost: '',
+			quantity: '',
+			inputType: '',
+			purchaseDate: '',
+			acquiredDate: '',
 			submitted: false,
 			showMsg: false
     }
@@ -71,54 +70,51 @@ class ListEquipments extends Component {
 		const { success } = this.props
 		if ((prevProps.success !== true && success === true)) {
 			this.setState({
-				equipmentName: '',
+				inputName: '',
 				vendorID: '',
 				cost: 0,
 				quantity: 1,
-				measurement: 0,
-				equipmentType: '',
+				inputType: '',
 				purchaseDate: 1990,
-				expDate: 2020,
+				acquiredDate: 2020,
 				isSubmitted: false,
 				showMsg: true,
 			})
 
 			setTimeout(() => {
 				this.setState({ showMsg: false })
-				this.props.resetCreateEquipments()
+				this.props.resetCreateInputs()
 			}, 3000)
 		}
   }
-  handleCreateEquipment = () => {
+  handleCreateInput = () => {
 
 		const {
-			equipmentName,
+			inputName,
 			vendorID,
 			cost,
 			quantity,
-			measurement,
-			equipmentType,
+			inputType,
 			purchaseDate,
-			expDate
+			acquiredDate
 		} = this.state
 
-		const equipment = {
-			equipmentName: equipmentName,
+		const input = {
+			inputName: inputName,
 			vendorID: vendorID,
 			cost: cost,
 			quantity: quantity,
-			measurement: measurement,
-			equipmentType: equipmentType,
+			inputType: inputType,
 			purchaseDate: purchaseDate,
-			expDate: expDate,
+			acquiredDate: acquiredDate,
 		}
 
 		this.setState({
 			isSubmitted: true
 		})
 
-		if (equipmentName && vendorID && cost && quantity && measurement && equipmentType && purchaseDate && expDate) {
-			this.props.createEquipments(equipment)
+		if (inputName && vendorID && cost && quantity && inputType && purchaseDate && acquiredDate) {
+			this.props.createInputs(input)
 		}
 		else {
 			this.setState({
@@ -130,18 +126,18 @@ class ListEquipments extends Component {
 
 //--------------------------------------------list--------------------------------------------//
   componentDidMount() {
-    this.props.getEquipments(null, null, null)
-    this.props.getEquipmentsYearExpire()
+    this.props.getInputs(null, null, null)
+    this.props.getInputsYearAcquired()
   }
 
   handleSearchButton = () => {
     const { searchText, searchYear, dataSort } = this.state
-    this.props.getEquipments(searchText, searchYear, dataSort)
+    this.props.getInputs(searchText, searchYear, dataSort)
   }
 
   renderTable() {
 
-    const { equipmentsData } = this.props
+    const { inputsData } = this.props
     return (
       <div style={{ width: '100%', marginLeft: 20, marginTop: 5 }} className="table-bordered-dot" >
         <Table hover bordered striped responsive size="sm" className="responsive-table" >
@@ -150,14 +146,14 @@ class ListEquipments extends Component {
               <th>#</th>
               <th className="text-center">Name</th>
               <th className="text-center">Quantity</th>
-              <th className="text-center">Expiration Date</th>
+              <th className="text-center">Date Acquired</th>
               <th className="text-center">Manage</th>
             </tr>
           </thead>
           <tbody>
-            {equipmentsData ? equipmentsData.map((data, i) => {
+            {inputsData ? inputsData.map((data, i) => {
 
-              let link = `/equipments/view/${data.id}`
+              let link = `/inputs/view/${data.id}`
 
               return (
                 <tr key={i}>
@@ -167,15 +163,15 @@ class ListEquipments extends Component {
                   </td>
                   <td>
                     <div className="responsive-label">  Name </div>
-                    <div className="responsive-item"> <Link to={link}> {data.equipmentName} </Link></div>
+                    <div className="responsive-item"> <Link to={link}> {data.inputName} </Link></div>
                   </td>
                   <td>
                     <div className="responsive-label"> Quantity </div>
                     <div className="responsive-item text-right">{data.quantity}</div>
                   </td>
                   <td>
-                    <div className="responsive-label"> Expiration Date </div>
-                    <div className="responsive-item text-center">{data.expDate}</div>
+                    <div className="responsive-label"> Date Acquired  </div>
+                    <div className="responsive-item text-center">{data.acquiredDate}</div>
                   </td>
                   <td>
                     <div className="responsive-label"> Manage </div>
@@ -204,21 +200,20 @@ class ListEquipments extends Component {
 
     //create
     const {
-			equipmentName,
+			inputName,
 			vendorID,
 			cost,
 			quantity,
-			measurement,
-			equipmentType,
+			inputType,
 			purchaseDate,
-			expDate,
+			acquiredDate,
 			isSubmitted,
 			showMsg
     } = this.state
     const { loading } = this.props
 
     //list
-    const { equipmentsData } = this.props
+    const { inputsData } = this.props
     const { searchText, dataSort } = this.state
 
     return (
@@ -226,7 +221,7 @@ class ListEquipments extends Component {
         <Card className="reports-card">
           <CardHeader>
             <h5 style={{ display: 'inline-block', paddingTop: 4 }}>
-              Equipment List
+              Input List
                 </h5>
           </CardHeader>
           <CardBody>
@@ -239,7 +234,7 @@ class ListEquipments extends Component {
                       type="text"
                       name="searchText"
                       style={{ height: 35, width: 169 }}
-                      placeholder={'Equipment Name'}
+                      placeholder={'Input Name'}
                       value={searchText}
                       className="form-control"
                       onChange={this.handleChange} />
@@ -262,7 +257,7 @@ class ListEquipments extends Component {
                   </div>
                   <div>
                     <Button className="ml-15" onClick={this.openModal} color="dark">
-                      <i className="fa fa-plus-circle fa-lg hide" />  Add Equipment
+                      <i className="fa fa-plus-circle fa-lg hide" />  Add Input
                     </Button>
                     <Popup
                       open={this.state.open}
@@ -273,14 +268,15 @@ class ListEquipments extends Component {
                         <Card>
                           <CardHeader>
                             <a className="fa fa-close fa-lg pull-right" onClick={this.closeModal} />
-                            <h5 style={{ paddingTop: 4 }}>Add Equipment</h5>
+                            <h5 style={{ paddingTop: 4 }}>Add Input</h5>
                           </CardHeader>
                           <CardBody >
-                            {showMsg && <Alert color="success"> Equipment successfully added. </Alert>}
+                            {showMsg && <Alert color="success"> Input successfully added. </Alert>}
+                            <Col>
                             <Row>
                               <div style={{ position:'relative', marginLeft:'auto', marginRight:'auto' }}>
                                 <FormGroup>
-                                  <Label for="equipmentName"> Name :  </Label>
+                                  <Label for="inputName"> Name :  </Label>
                                   <InputGroup>
                                     <InputGroupAddon addonType="append">
                                       <InputGroupText>
@@ -288,57 +284,41 @@ class ListEquipments extends Component {
                                       </InputGroupText>
                                       <Input
                                         type='text'
-                                        name="equipmentName"
+                                        name="inputName"
                                         placeholder={'Name of the Product'}
                                         maxLength="30"
-                                        value={equipmentName}
+                                        value={inputName}
                                         onChange={this.handleChange}
-                                        className={!equipmentName && isSubmitted ? 'has-error' : ''}
+                                        className={!inputName && isSubmitted ? 'has-error' : ''}
                                       />
                                     </InputGroupAddon>
                                   </InputGroup>
                                 </FormGroup>
                                 <FormGroup>
-                                  <Label for="cost"> Cost :  </Label>
+                                  <Label for="inputType"> Category :  </Label>
                                   <InputGroup>
                                     <InputGroupAddon addonType="append" style={{height:'35px'}}>
                                       <InputGroupText>
                                         <i className="icon-paypal"></i>
                                       </InputGroupText>
-                                      <CurrencyInput
-                                        name="cost"
-                                        placeholder="PHP 0.00"
-                                        height="30"
-                                        onChange={this.handleChange}
-                                        className={!cost && isSubmitted ? 'has-error' : ''}
-                                      />
-                                    </InputGroupAddon>
-                                  </InputGroup>
-                                </FormGroup>
-                                <FormGroup>
-                                  <Label for="measurement"> Measurement :  </Label>
-                                  <InputGroup>
-                                    <InputGroupAddon addonType="append">
-                                      <InputGroupText>
-                                        <i className="icon-speedometer"></i>
-                                      </InputGroupText>
                                       <Input
                                         type='select'
-                                        name="measurement"
-                                        value={measurement}
+                                        name="inputType"
+                                        placeholder={'Type of Input'}
+                                        maxLength="30"
+                                        value={inputType}
                                         onChange={this.handleChange}
-                                        className={!measurement && isSubmitted ? 'has-error' : ''}
+                                        className={!inputType && isSubmitted ? 'has-error' : ''}
                                       >
-                                        <option>KG</option>
-                                        <option>PCS</option>
-                                        <option>L</option>
+                                        <option>Tool</option>
+                                        <option>Tractor</option>
+                                        <option>Other</option>
                                       </Input>
-
                                     </InputGroupAddon>
                                   </InputGroup>
                                 </FormGroup>
                                 <FormGroup>
-                                  <Label for="purchaseDate"> Year Purchased :  </Label>
+                                  <Label for="purchaseDate"> Date Purchased :  </Label>
                                   <InputGroup>
                                     <InputGroupAddon addonType="append">
                                       <InputGroupText>
@@ -359,16 +339,16 @@ class ListEquipments extends Component {
                               </div>
                               <div style={{ position:'relative', marginLeft:'auto', marginRight:'auto' }}>
                                 <FormGroup>
-                                  <Label for="vendorID"> Vendor :  </Label>
+                                  <Label for="vendorID"> ID Number :  </Label>
                                   <InputGroup>
                                     <InputGroupAddon addonType="append">
                                       <InputGroupText>
                                         <i className="icon-user-follow"></i>
                                       </InputGroupText>
                                       <Input
-                                        type='text'
+                                        type='number'
                                         name="vendorID"
-                                        placeholder={'Name of Vendor'}
+                                        placeholder={'0'}
                                         maxLength="30"
                                         value={vendorID}
                                         onChange={this.handleChange}
@@ -378,48 +358,26 @@ class ListEquipments extends Component {
                                   </InputGroup>
                                 </FormGroup>
                                 <FormGroup>
-                                  <Label for="quantity"> Quantity :  </Label>
-                                  <InputGroup>
-                                    <InputGroupAddon addonType="append">
-                                      <InputGroupText>
-                                        <i className="icon-star"></i>
-                                      </InputGroupText>
-                                      <Input
-                                        type='number'
-                                        name="quantity"
-                                        maxLength="30"
-                                        value={quantity}
-                                        onChange={this.handleChange}
-                                        className={!quantity && isSubmitted ? 'has-error' : ''}
-                                      />
-                                    </InputGroupAddon>
-                                  </InputGroup>
-                                </FormGroup>
-                                <FormGroup>
-                                  <Label for="equipmentType"> Equipment Type :  </Label>
+                                  <Label for="cost"> Model :  </Label>
                                   <InputGroup>
                                     <InputGroupAddon addonType="append">
                                       <InputGroupText>
                                         <i className="icon-screen-desktop"></i>
                                       </InputGroupText>
                                       <Input
-                                        type='select'
-                                        name="equipmentType"
-                                        placeholder={'Type of Equipment'}
+                                        type='text'
+                                        name="cost"
+                                        placeholder={'Product Model'}
                                         maxLength="30"
-                                        value={equipmentType}
+                                        value={cost}
                                         onChange={this.handleChange}
-                                        className={!equipmentType && isSubmitted ? 'has-error' : ''}
-                                      >
-                                        <option>Machinery</option>
-                                        <option>Seeds</option>
-                                        <option>Chemicals</option>
-                                      </Input>
+                                        className={!cost && isSubmitted ? 'has-error' : ''}
+                                      />
                                     </InputGroupAddon>
                                   </InputGroup>
                                 </FormGroup>
                                 <FormGroup>
-                                  <Label for="expDate"> Expiration Date :  </Label>
+                                  <Label for="acquiredDate"> Date Acquired :  </Label>
                                   <InputGroup>
                                     <InputGroupAddon addonType="append">
                                       <InputGroupText>
@@ -427,23 +385,45 @@ class ListEquipments extends Component {
                                       </InputGroupText>
                                       <Input
                                         type='date'
-                                        name="expDate"
-                                        // placeholder={'11/25/1671'}
+                                        name="acquiredDate"
                                         maxLength="30"
-                                        value={expDate}
+                                        value={acquiredDate}
                                         onChange={this.handleChange}
-                                        className={!expDate && isSubmitted ? 'has-error' : ''}
+                                        className={!acquiredDate && isSubmitted ? 'has-error' : ''}
                                       />
                                     </InputGroupAddon>
                                   </InputGroup>
                                 </FormGroup>
                               </div>
                             </Row>
+                            <Row>
+                              <div style={{ position:'relative', marginLeft:'auto', marginRight:'auto' }}>
+                                < FormGroup>
+                                  <Label for="quantity"> Description :  </Label>
+                                  <InputGroup>
+                                    <InputGroupAddon addonType="append" style={{height:'100px', width:'300px'}}>
+                                      <InputGroupText>
+                                        <i className="icon-paper-clip"></i>
+                                      </InputGroupText>
+                                      <Input
+                                        type='textarea'
+                                        name="quantity"
+                                        value={quantity}
+                                        onChange={this.handleChange}
+                                        className={!quantity && isSubmitted ? 'has-error' : ''}
+                                      />
+                                    </InputGroupAddon>
+                                  </InputGroup>
+                                </FormGroup>
+                              </div>
+                            </Row>
+                            </Col>  
                               <div className="align-right">
+                                
                                 <Button
                                   color="success"
                                   className="btn-spacing pull-right"
-                                  onClick={this.handleCreateEquipment}
+                                  onClick={this.handleCreateInput}
                                   disabled={loading}
                                   style={{ float: 'right' }}>
                                   <i className="fa fa-unlock-alt fa-lg" /> Save
@@ -461,7 +441,7 @@ class ListEquipments extends Component {
             </Row>
             <Row>
               {this.renderTable()}
-              {(equipmentsData && equipmentsData.length === 0) || equipmentsData === [] ? <label style={{ textAlign: 'center', width: '100%' }}><b> No data found</b></label> : null}
+              {(inputsData && inputsData.length === 0) || inputsData === [] ? <label style={{ textAlign: 'center', width: '100%' }}><b> No data found</b></label> : null}
             </Row>
 
           </CardBody>
@@ -477,30 +457,30 @@ class ListEquipments extends Component {
 
 const mapStateToProps = state => ({
   //create
-  error: state.equipments.createEquipments.error,
-	success: state.equipments.createEquipments.success,
-	response: state.equipments.createEquipments.response,
-  loading: state.equipments.createEquipments.loading,
+  error: state.inputs.createInputs.error,
+	success: state.inputs.createInputs.success,
+	response: state.inputs.createInputs.response,
+  loading: state.inputs.createInputs.loading,
   //list
-  equipmentsData: state.equipments.equipmentsList.data,
-  loadings: state.equipments.equipmentsList.loading,
-  errors: state.equipments.equipmentsList.error,
+  inputsData: state.inputs.inputsList.data,
+  loadings: state.inputs.inputsList.loading,
+  errors: state.inputs.inputsList.error,
 })
 
 const mapDispatchToProps = dispatch => ({
   //create
-	createEquipments: (equipment) => dispatch(createEquipments(equipment)),
-  resetCreateEquipments: () => dispatch(resetCreateEquipments()),
+	createInputs: (input) => dispatch(createInputs(input)),
+  resetCreateInputs: () => dispatch(resetCreateInputs()),
   //list
-  getEquipments: (name, year, sortOrder) => dispatch(getEquipments(name, year, sortOrder)),
-  getEquipmentsYearExpire: () => dispatch(getEquipmentsYearExpire())
+  getInputs: (name, year, sortOrder) => dispatch(getInputs(name, year, sortOrder)),
+  getInputsYearAcquired: () => dispatch(getInputsYearAcquired())
 })
 
 PropTypes.CreateDrinks = {
 	error: PropTypes.bool.isRequired,
 	success: PropTypes.object.isRequired,
 	response: PropTypes.bool,
-	createEquipments: PropTypes.func,
+	createInputs: PropTypes.func,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListEquipments)
+export default connect(mapStateToProps, mapDispatchToProps)(ListInputs)
