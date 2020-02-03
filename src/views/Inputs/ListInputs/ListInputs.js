@@ -1,7 +1,6 @@
 //main
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import CurrencyInput from './CurrencyInput'
 import Popup from 'reactjs-popup'
 import {
   Alert,
@@ -14,13 +13,16 @@ import {
   Card,
   Button,
   CardBody,
-  CardFooter,
-  CardHeader,
   Table,
   Row,
   Col
 
 } from 'reactstrap'
+
+import CurrencyInput from '../../../components/CurrencyInputs'
+import StyledButton from '../../../components/StyledButton'
+import StyledCardHeader from '../../../components/StyledCardHeader'
+
 
 //create
 import PropTypes from 'prop-types'
@@ -34,6 +36,7 @@ const sortOrder = [
     { id: 'yearAscending', name: 'Acquired Date Ascending' },
     { id: 'yearDescending', name: 'Acquired Date Descending' }
 ]
+
 
 class ListInputs extends Component {
 
@@ -238,16 +241,14 @@ class ListInputs extends Component {
 
     return (
       <div className="animated fadeIn" style={{ minWidth: '450px' }}>
-        <Card className="reports-card">
-          <CardHeader>
-            <h5 style={{ display: 'inline-block', paddingTop: 4 }}>
-              Input List
-                </h5>
-          </CardHeader>
+        <Card>
+          <StyledCardHeader>
+            <h5 style={{ paddingTop: 4}}> Input List </h5>
+          </StyledCardHeader>
           <CardBody>
             <Row>
               <Col xs='12' sm='12' md='12' lg='12' xl='12'>
-                <div className="form-row responsive mobile-margin-bottom" style={{ marginLeft: 5, marginTop: 5, }}>
+                <div className="form-row responsive mobile-margin-bottom" style={{ marginLeft: 5, marginTop: 5}}>
 
                   <div style={{ marginRight: 2 }}>
                     <Input
@@ -271,25 +272,25 @@ class ListInputs extends Component {
                   </div>
 
                   <div className='row mobile-search-button-margin' >
-                    <Button className="ml-15" style={{ width: 115 }} onClick={() => this.handleSearchButton()} color="dark">
+                    <StyledButton className="ml-15" style={{ width: 115 }} onClick={() => this.handleSearchButton()}>
                       <i className="fa fa-search fa-lg hide" />  Search
-                    </Button>
+                    </StyledButton>
                   </div>
                   <div>
-                    <Button className="ml-15" onClick={this.openModal} color="dark">
+                    <StyledButton className="ml-15" onClick={this.openModal}>
                       <i className="fa fa-plus-circle fa-lg hide" />  Add Input
-                    </Button>
+                    </StyledButton>
                     <Popup
                       open={this.state.open}
                       closeOnDocumentClick
                       onClose={this.closeModal}
                     >
-                      <div className="animated fadeIn">
+                      <div className="animated fadeIn" style= {{height:"630px"}}>
                         <Card>
-                          <CardHeader>
+                          <StyledCardHeader>
                             <a className="fa fa-close fa-lg pull-right" onClick={this.closeModal} />
-                            <h5 style={{ paddingTop: 4 }}>Add Input</h5>
-                          </CardHeader>
+                            <h5 style={{ paddingTop: 4}}>Add Input</h5>
+                          </StyledCardHeader>
                           <CardBody >
                             {showMsg && <Alert color="success"> Input successfully added. </Alert>}
                             <Col>
@@ -298,7 +299,7 @@ class ListInputs extends Component {
                                 <FormGroup>
                                   <Label for="inputName"> Name :  </Label>
                                   <InputGroup>
-                                    <InputGroupAddon addonType="append">
+                                    <InputGroupAddon addonType="append" style={{width:'350px'}}>
                                       <InputGroupText>
                                         <i className="icon-screen-desktop"></i>
                                       </InputGroupText>
@@ -316,7 +317,7 @@ class ListInputs extends Component {
                                 <FormGroup>
                                   <Label for="model"> Model :  </Label>
                                   <InputGroup>
-                                    <InputGroupAddon addonType="append">
+                                    <InputGroupAddon addonType="append" style={{width:'350px'}}>
                                       <InputGroupText>
                                         <i className="icon-screen-smartphone"></i>
                                       </InputGroupText>
@@ -334,14 +335,13 @@ class ListInputs extends Component {
                                 <FormGroup>
                                   <Label for="cost"> Cost :  </Label>
                                   <InputGroup>
-                                    <InputGroupAddon addonType="append" style={{height:'35px'}}>
+                                    <InputGroupAddon addonType="append" style={{height:'35px', width:'350px'}}>
                                       <InputGroupText>
                                         <i className="icon-paypal"></i>
                                       </InputGroupText>
                                       <CurrencyInput
                                         name="cost"
                                         placeholder="PHP 0.00"
-                                        height="30"
                                         onChange={this.handleChange}
                                         className={!cost && isSubmitted ? 'has-error' : ''}
                                       />
@@ -351,14 +351,13 @@ class ListInputs extends Component {
                                 <FormGroup>
                                   <Label for="category"> Category :  </Label>
                                   <InputGroup>
-                                    <InputGroupAddon addonType="append">
+                                    <InputGroupAddon addonType="append" style={{width:'350px'}}>
                                       <InputGroupText>
                                         <i className="icon-list"></i>
                                       </InputGroupText>
                                       <Input
                                         type='select'
                                         name="category"
-                                         
                                         value={category}
                                         onChange={this.handleChange}
                                         className={!category && isSubmitted ? 'has-error' : ''}
@@ -373,7 +372,7 @@ class ListInputs extends Component {
                                 <FormGroup>
                                   <Label for="acquiredDate"> Date Acquired :  </Label>
                                   <InputGroup>
-                                    <InputGroupAddon addonType="append">
+                                    <InputGroupAddon addonType="append" style={{width:'350px'}}>
                                       <InputGroupText>
                                         <i className="icon-calendar"></i>
                                       </InputGroupText>
@@ -392,7 +391,7 @@ class ListInputs extends Component {
                                 <FormGroup>
                                   <Label for="vendor"> Vendor :  </Label>
                                   <InputGroup>
-                                    <InputGroupAddon addonType="append">
+                                    <InputGroupAddon addonType="append" style={{width:'350px'}}>
                                       <InputGroupText>
                                         <i className="icon-user"></i>
                                       </InputGroupText>
@@ -410,7 +409,7 @@ class ListInputs extends Component {
                                 <FormGroup>
                                   <Label for="inputID"> Input ID :  </Label>
                                   <InputGroup>
-                                    <InputGroupAddon addonType="append">
+                                    <InputGroupAddon addonType="append" style={{width:'350px'}}>
                                       <InputGroupText>
                                         <i className="icon-user-follow"></i>
                                       </InputGroupText>
@@ -428,7 +427,7 @@ class ListInputs extends Component {
                                 <FormGroup>
                                   <Label for="quantity"> Quantity :  </Label>
                                   <InputGroup>
-                                    <InputGroupAddon addonType="append">
+                                    <InputGroupAddon addonType="append" style={{width:'350px'}}>
                                       <InputGroupText>
                                         <i className="icon-grid"></i>
                                       </InputGroupText>
@@ -446,7 +445,7 @@ class ListInputs extends Component {
                                 <FormGroup>
                                   <Label for="measurement"> Measurement :  </Label>
                                   <InputGroup>
-                                    <InputGroupAddon addonType="append">
+                                    <InputGroupAddon addonType="append" style={{width:'350px'}}>
                                       <InputGroupText>
                                         <i className="icon-speedometer"></i>
                                       </InputGroupText>
@@ -467,7 +466,7 @@ class ListInputs extends Component {
                                 <FormGroup>
                                   <Label for="expiredDate"> Expiration Date :  </Label>
                                   <InputGroup>
-                                    <InputGroupAddon addonType="append">
+                                    <InputGroupAddon addonType="append" style={{width:'350px'}}>
                                       <InputGroupText>
                                         <i className="icon-calendar"></i>
                                       </InputGroupText>
@@ -489,12 +488,13 @@ class ListInputs extends Component {
                                 < FormGroup>
                                   <Label for="description"> Description :  </Label>
                                   <InputGroup>
-                                    <InputGroupAddon addonType="append" style={{height:'50px', width:'400px'}}>
+                                    <InputGroupAddon addonType="append" style={{height:'50px', width:'730px'}}>
                                       <InputGroupText>
                                         <i className="icon-paper-clip"></i>
                                       </InputGroupText>
                                       <Input
                                         type='textarea'
+                                        style={{resize:'none'}}
                                         name="description"
                                         value={description}
                                         onChange={this.handleChange}
@@ -504,13 +504,14 @@ class ListInputs extends Component {
                                   </InputGroup>
                                 </FormGroup>
                               </div>
+                              <div style={{ position:'relative', marginLeft:'auto', marginRight:'auto' }}>
+                              </div>
                             </Row>
                             </Col>  
                               <div className="align-right">
-                                
                                 <Button
                                   color="success"
-                                  className="btn-spacing pull-right"
+                                  className="btn-spacing"
                                   onClick={this.handleCreateInput}
                                   disabled={loading}
                                   style={{ float: 'right' }}>
@@ -533,9 +534,6 @@ class ListInputs extends Component {
             </Row>
 
           </CardBody>
-          <CardFooter>
-
-          </CardFooter>
         </Card>
       </div>
     )
