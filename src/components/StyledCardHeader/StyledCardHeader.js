@@ -4,7 +4,7 @@ import {
 } from 'reactstrap'
 
 const StyledCardHeader = styled(CardHeader)`
-  color : #f7e7ce;
+  color : #ffffff;
   background: #337247;
   font-weight: 'bold'; 
 `
