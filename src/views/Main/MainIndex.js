@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import LineChart from 'react-linechart';
-import DonutChart  from 'react-donut-chart';
+import { Doughnut, Line } from 'react-chartjs-2'
 import {
 	Container,
 	Col,
@@ -14,6 +13,41 @@ import StyledCardHeader from '../../components/StyledCardHeader';
 
 class MainIndex extends Component {
 	render() {
+		const dataLine = {
+			labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+			datasets: [{
+				data: [86,114,106,106,107,111,133,221,783,2478],
+				label: "Africa",
+				borderColor: "#3e95cd",
+				fill: false
+			}, { 
+				data: [282,350,411,502,635,809,947,1402,3700,5267],
+				label: "Asia",
+				borderColor: "#8e5ea2",
+				fill: false
+			}, { 
+				data: [168,170,178,190,203,276,408,547,675,734],
+				label: "Europe",
+				borderColor: "#3cba9f",
+				fill: false
+			}]
+		};
+
+		const data = {
+			labels: ["America", "Asia", "Europe"],
+			datasets: [{
+				backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+				data: [2478,5267,734]
+			}]
+		};
+
+		const data2 = {
+			labels: ["Asia"],
+			datasets: [{
+				backgroundColor: ["#3e95cd"],
+				data: [1]
+			}]
+		};
 		
 		return (
 			<Container fluid style={{paddingLeft:'7px',paddingRight:'7px'}}>
@@ -62,17 +96,12 @@ class MainIndex extends Component {
 								<a className="text-muted pull-right">docs</a>
 								<h3 className="box-title">Cash Flow</h3>
 							</StyledCardHeader>
-							<CardBody>
+							<CardBody >
 								<div className="text-center">
-									<LineChart 
-										width= '600'
-										height= '400'
-										yLabel= "Profit"
-										xLabel= "Year"
-										data={[{	
-												color: "steelblue", 
-												points: [{x: 1, y: 2}, {x: 3, y: 3}, {x: 7, y: 1}] 
-										}]}
+									<Line 
+										data={dataLine}
+										height={400}
+										options={{ maintainAspectRatio: false}}
 									/>
 								</div>	
 							</CardBody>
@@ -87,21 +116,12 @@ class MainIndex extends Component {
 								<h3 className="box-title">Incomes by Category</h3>
 							</StyledCardHeader>
 							<CardBody>
-								<div className="text-center">
-									<DonutChart 
-										width={300}
-										height={200}
-										data={[{
-											label: 'Never gonna',
-											value: 25
-										},
-										{
-											label: 'Give you up',
-											value: 75,
-											isEmpty: true
-										}]} 
+								<div style={{height:'200px', width:'300px'}}>
+									<Doughnut 
+										data={data}
+										options={{ maintainAspectRatio: false}}
 									/>
-								</div>	
+								</div>
 							</CardBody>
 						</Card>
 					</Col>
@@ -112,21 +132,12 @@ class MainIndex extends Component {
 								<h3 className="box-title">Expenses by Category</h3>
 							</StyledCardHeader>
 							<CardBody>
-								<div className="text-center">
-									<DonutChart 
-										width={300}
-										height={200}
-										data={[{
-											label: 'Never gonna',
-											value: 75
-										},
-										{
-											label: 'Let you down',
-											value: 25,
-											isEmpty: true
-										}]} 
+								<div className="text-center" style={{height:'200px', width:'300px'}}>
+									<Doughnut 
+										data={data2}
+										options={{ maintainAspectRatio: false}}
 									/>
-								</div>	
+								</div>
 							</CardBody>
 						</Card>
 					</Col>
