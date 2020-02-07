@@ -56,7 +56,7 @@ class DefaultLayout extends Component {
 										: null;
 								},
 								)}
-								<Redirect from="/" to="/drinks/create" />
+								<Redirect from="/" to="/main" />
 							</Switch>
 						</Container>
 					</main>

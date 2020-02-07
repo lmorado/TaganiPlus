@@ -4,7 +4,8 @@ import GrowingMediaInputs from '../views/Inputs/GrowingMediaInputs'
 import FertilizerInputs from '../views/Inputs/FertilizerInputs'
 import SeedInputs from '../views/Inputs/SeedInputs'
 import NewActivities from '../views/Activities/NewActivities'
-import FinancialReports from '../views/Reports/FinancialReports'
+import IncomeSummary from '../views/Reports/IncomeSummary'
+import ExpenseSummary from '../views/Reports/ExpenseSummary'
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -14,7 +15,8 @@ const routes = [
   { path: '/inputs/fertilizer', exact: true, name: 'Fertilizers', component: FertilizerInputs, value: 'fertilizer_Inputs' },
   { path: '/inputs/seeds', exact: true, name: 'Seeds', component: SeedInputs, value: 'seeds_Inputs' },
   { path: '/activities', exact: true, name: 'New Activities', component: NewActivities, value: 'activities' },
-  { path: '/reports', exact: true, name: 'Financial Reports', component: FinancialReports, value: 'reports' }
+  { path: '/reports/income', exact: true, name: 'Income Summary', component: IncomeSummary, value: 'reports_Income' },
+  { path: '/reports/expense', exact: true, name: 'Expense Summary', component: ExpenseSummary, value: 'reports_Expense' }
 ];
 
 

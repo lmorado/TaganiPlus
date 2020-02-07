@@ -9,7 +9,6 @@ const StyledButton = styled(Button)`
   width: 12em;
   border-radius: 3px;
   border: 2px solid #216438;
-  box-shadow: 5px -5px
   background: #282828;
   color: #f7e7ce;
 `

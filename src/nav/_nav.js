@@ -12,6 +12,7 @@ export default {
       id: 'Inputs',
       url: '/inputs',
       icon: 'icon-rocket',
+      value: 'inputs',
       children: [
         {
           name: 'Manage Inputs',
@@ -34,7 +35,6 @@ export default {
           icon: 'icon-list',
         }
       ],
-      value: 'Drksz',
     },
 
     {
@@ -42,7 +42,7 @@ export default {
       id: 'Tr2',
       url: '/drinks',
       icon: 'icon-cursor',
-      value: 'tr-2',
+      value: 'drinks',
     },
     {
       name: 'Finance',
@@ -57,6 +57,18 @@ export default {
       url: '/reports',
       icon: 'icon-paper-clip',
       value: 'reports',
+      children: [
+        {
+          name: 'Income Summary',
+          url: '/reports/income',
+          icon: 'fa fa-money',
+        },
+        {
+          name: 'Expense Summary',
+          url: '/reports/expense',
+          icon: 'fa fa-shopping-cart',
+        }
+      ],
     },
   ]
 };
