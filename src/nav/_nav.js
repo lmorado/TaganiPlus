@@ -46,10 +46,32 @@ export default {
     },
     {
       name: 'Finance',
-      id: 'activities',
-      url: '/activities',
+      id: 'finance',
+      url: '/finance',
       icon: 'icon-camrecorder',
-      value: 'activities',
+      value: 'finance',
+      children: [
+        {
+          name: 'Accounts',
+          url: '/finance/accounts',
+          icon: 'fa fa-money',
+        },
+        {
+          name: 'Transfers',
+          url: '/finance/transfers',
+          icon: 'fa fa-money',
+        },
+        {
+          name: 'Transactions',
+          url: '/finance/transactions',
+          icon: 'fa fa-money',
+        },
+        {
+          name: 'Reconciliations',
+          url: '/finance/reconciliations',
+          icon: 'fa fa-money',
+        }
+      ],
     },
     {
       name: 'Reports',

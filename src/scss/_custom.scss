@@ -100,9 +100,9 @@ input.green-disable:disabled::placeholder {
 
 .btn-danger.disabled,
 .btn-danger:disabled {
-  background-color: #f2f2f2 !important;
-  border-color: $light-green !important;
+  background: #f2f2f2;
   color: $dark-green;
+  border-color: $light-green !important;
   cursor: not-allowed;
 }
 
@@ -153,13 +153,20 @@ input {
 }
 
 .btn {
+  font-size: 1em;
+  padding: .4em;
+  width: 12em;
+  border-radius: 2px;
+  border: 2px solid $dark-green;
+  background: $true-gray;
   color: $white;
-  background-color: $true-gray;
-  border-color: $true-gray;
-  border-radius: 3px;
 
   &:hover {
     background-color: $dark-gray;
+    background: $white;
+    color: $true-gray;
+    border-radius: 2px;
+    border: 2px solid $button-color-transparent;
 
     .fa-refresh {
       color: $white;

@@ -56,7 +56,7 @@ class MainIndex extends Component {
 						<Card style={{  padding: 10 }}>
 							<CardBody className="clearfix p-0">
 								<a className="bg-blue p-4 mr-3 float-left">
-									<i className="fa fa-money fa-3x"></i>
+									<i className="fa fa-money fa-3x" style={{color:'white'}}></i>
 								</a>
 								<h5 className="mb-0 text-right text-primary pt-3"> $1,995.5</h5>
 								<h5 className="text-muted text-right text-uppercase font-weight-bold font-xs"> Total Income </h5>
@@ -68,7 +68,7 @@ class MainIndex extends Component {
 						<Card style={{  padding: 10 }}>
 							<CardBody className="clearfix p-0">
 								<a className="bg-red p-4 mr-3 float-left">
-									<i className="fa fa-shopping-cart fa-3x"></i>
+									<i className="fa fa-shopping-cart fa-3x" style={{color:'white'}}></i>
 								</a>
 								<h5 className="mb-0 text-right text-primary pt-3"> $1,995.5</h5>
 								<h5 className="text-muted text-right text-uppercase font-weight-bold font-xs"> Total Expenses </h5>
@@ -80,7 +80,7 @@ class MainIndex extends Component {
 						<Card style={{  padding: 10 }}>
 							<CardBody className="clearfix p-0">
 								<a className="bg-green p-4 mr-3 float-left">
-									<i className="fa fa-heart fa-3x"></i>
+									<i className="fa fa-heart fa-3x" style={{color:'white'}}></i>
 								</a>
 								<h5 className="mb-0 text-right text-primary pt-3"> $1,995.5</h5>
 								<h5 className="text-muted text-right text-uppercase font-weight-bold font-xs"> Total Profit </h5>

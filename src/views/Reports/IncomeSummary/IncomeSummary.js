@@ -20,6 +20,7 @@ import StyledCardHeader from '../../../components/StyledCardHeader'
 import Popup from 'reactjs-popup'
 import CurrencyInput from '../../../components/CurrencyInputs'
 import PropTypes from 'prop-types'
+import { createIncome, resetCreateIncome } from '../../../actions/reports/createIncome'
 
 
 class IncomeSummary extends Component {
@@ -129,7 +130,7 @@ class IncomeSummary extends Component {
 														<Row>
 															<div style={{ position:'relative', marginLeft:'auto', marginRight:'auto' }}>
 																<FormGroup>
-																	<Label for="amount"> Cost :  </Label>
+																	<Label style={{color:'black'}} for="amount"> Cost :  </Label>
 																	<InputGroup>
 																		<InputGroupAddon addonType="append" style={{height:'35px', width:'350px'}}>
 																		<InputGroupText>
@@ -145,7 +146,7 @@ class IncomeSummary extends Component {
 																	</InputGroup>
 																</FormGroup>
 																<FormGroup>
-																	<Label for="year"> Year :  </Label>
+																	<Label style={{color:'black'}} for="year"> Year :  </Label>
 																	<InputGroup>
 																		<InputGroupAddon addonType="append" style={{width:'350px'}}>
 																		<InputGroupText>
@@ -198,25 +199,23 @@ class IncomeSummary extends Component {
 	}
 }
 
-// const mapStateToProps = state => ({
-// 	error: state.reports.createIncome.error,
-// 	success: state.reports.createIncome.success,
-// 	response: state.reports.createIncome.response,
-// 	loading: state.reports.createIncome.loading,
-// })
+const mapStateToProps = state => ({
+	error: state.reports.createIncome.error,
+	success: state.reports.createIncome.success,
+	response: state.reports.createIncome.response,
+	loading: state.reports.createIncome.loading,
+})
 
-// const mapDispatchToProps = dispatch => ({
-// 	createIncome: (expense) => dispatch(createIncome(expense)),
-// 	resetCreateIncome: () => dispatch(resetCreateIncome()),
-// })
+const mapDispatchToProps = dispatch => ({
+	createIncome: (expense) => dispatch(createIncome(expense)),
+	resetCreateIncome: () => dispatch(resetCreateIncome()),
+})
 
-// PropTypes.CreateDrinks = {
-// 	error: PropTypes.bool.isRequired,
-// 	success: PropTypes.object.isRequired,
-// 	response: PropTypes.bool,
-// 	createIncome: PropTypes.func,
-// }
+PropTypes.CreateDrinks = {
+	error: PropTypes.bool.isRequired,
+	success: PropTypes.object.isRequired,
+	response: PropTypes.bool,
+	createIncome: PropTypes.func,
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(IncomeSummary) 
-
-export default IncomeSummary
+export default connect(mapStateToProps, mapDispatchToProps)(IncomeSummary) 

@@ -118,7 +118,7 @@ class ExpenseSummary extends Component {
 										closeOnDocumentClick
 										onClose={this.closeModal}
 									>
-										<div className="animated fadeIn" style= {{height:"310px"}}>
+										<div className="animated fadeIn" style= {{height:"300px"}}>
 											<Card>
 												<StyledCardHeader>
 													<a className="fa fa-close fa-lg pull-right" onClick={this.closeModal} />
@@ -130,9 +130,9 @@ class ExpenseSummary extends Component {
 														<Row>
 															<div style={{ position:'relative', marginLeft:'auto', marginRight:'auto' }}>
 																<FormGroup>
-																	<Label for="amount"> Cost :  </Label>
+																	<Label style={{color:'black'}} for="amount"> Cost :  </Label>
 																	<InputGroup>
-																		<InputGroupAddon addonType="append" style={{height:'35px', width:'350px'}}>
+																		<InputGroupAddon addonType="append" style={{height:'35px'}}>
 																		<InputGroupText>
 																			<i className="icon-paypal"></i>
 																		</InputGroupText>
@@ -146,11 +146,11 @@ class ExpenseSummary extends Component {
 																	</InputGroup>
 																</FormGroup>
 																<FormGroup>
-																	<Label for="year"> Year :  </Label>
+																	<Label style={{color:'black'}} for="year"> Year :  </Label>
 																	<InputGroup>
-																		<InputGroupAddon addonType="append" style={{width:'350px'}}>
+																		<InputGroupAddon addonType="append" style={{width:'195px'}}>
 																		<InputGroupText>
-																			<i className="icon-user-follow"></i>
+																			<i className="icon-calendar"></i>
 																		</InputGroupText>
 																		<Input
 																			type='number'
