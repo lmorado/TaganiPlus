@@ -2,7 +2,7 @@ export default {
   items: [
     {
       name: 'Dashboard',
-      url: '/main',
+      url: '/main/index',
       id: 'Drinks',
       icon: 'icon-cup',
       value: 'Drksz',

@@ -11,6 +11,7 @@ $row-color-2: #f3f3f3;
 $row-color-3: $light-green;
 $button-color-transparent: #04880b;
 $greenss: #a5f1af;
+$sample: #A32727;
 /*CSS FOR RESPONSIVE TABLE Start 
 	*********************************/
 .responsive-table {
@@ -177,4 +178,23 @@ input {
 .btn-group > .btn {
   background: transparent !important;
   color: #000 !important;
+}
+
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
 }

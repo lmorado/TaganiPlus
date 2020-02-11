@@ -8,7 +8,7 @@ import {
 	CardBody,
 	Table
 } from 'reactstrap';
-import StyledCardHeader from '../../components/StyledCardHeader';
+import StyledCardHeader from '../../../components/StyledCardHeader';
 
 
 class MainIndex extends Component {

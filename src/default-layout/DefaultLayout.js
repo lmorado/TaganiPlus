@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
+import { connect } from 'react-redux';
 
 
 import {
@@ -22,6 +23,7 @@ import routes from '../nav/routes';
 import DefaultAside from './DefaultAside';
 import DefaultFooter from './DefaultFooter';
 import DefaultHeader from './DefaultHeader';
+import styled from 'styled-components'
 
 class DefaultLayout extends Component {
 
@@ -56,7 +58,7 @@ class DefaultLayout extends Component {
 										: null;
 								},
 								)}
-								<Redirect from="/" to="/main" />
+								<Redirect from="/" to="/login" />
 							</Switch>
 						</Container>
 					</main>
@@ -72,5 +74,9 @@ class DefaultLayout extends Component {
 	}
 }
 
+const mapStateToProps = state => ({
+	access: state.securityCode.user.access,
+	userTypeId: state.securityCode.user.userTypeId
+})
 
-export default DefaultLayout
+export default connect(mapStateToProps)(DefaultLayout)
