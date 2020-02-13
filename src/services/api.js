@@ -68,7 +68,7 @@ const requests = {
 
 const Auth = {
     login: (username, password) =>
-        requests.post('/api/account/login', { username, password }),
+        requests.post('/v1/Authentication/login', { username, password }),
     validatePin: (userId, pin) =>
         requests.post('/v1/Authentication/securitycode', { UserId: userId, SecurityCode: pin }),
     createPin: (userId, pin) =>

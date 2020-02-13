@@ -58,9 +58,9 @@ class MainIndex extends Component {
 								<a className="bg-blue p-4 mr-3 float-left">
 									<i className="fa fa-money fa-3x" style={{color:'white'}}></i>
 								</a>
-								<h5 className="mb-0 text-right text-primary pt-3"> $1,995.5</h5>
+								<h5 className="mb-0 text-right text-primary pt-3"> PHP1,995.5</h5>
 								<h5 className="text-muted text-right text-uppercase font-weight-bold font-xs"> Total Income </h5>
-								<h6 className="text-muted text-right font-weight-bold font-xs">Recievables -> $0.00/$0.00</h6>
+								<h6 className="text-muted text-right font-weight-bold font-xs">Recievables -> PHP0.00/PHP0.00</h6>
 							</CardBody>
 						</Card>
 					</Col>
@@ -70,9 +70,9 @@ class MainIndex extends Component {
 								<a className="bg-red p-4 mr-3 float-left">
 									<i className="fa fa-shopping-cart fa-3x" style={{color:'white'}}></i>
 								</a>
-								<h5 className="mb-0 text-right text-primary pt-3"> $1,995.5</h5>
+								<h5 className="mb-0 text-right text-primary pt-3"> PHP1,995.5</h5>
 								<h5 className="text-muted text-right text-uppercase font-weight-bold font-xs"> Total Expenses </h5>
-								<h6 className="text-muted text-right font-weight-bold font-xs">Payables -> $0.00/$0.00</h6>
+								<h6 className="text-muted text-right font-weight-bold font-xs">Payables -> PHP0.00/PHP0.00</h6>
 							</CardBody>
 						</Card>
 					</Col>
@@ -82,9 +82,9 @@ class MainIndex extends Component {
 								<a className="bg-green p-4 mr-3 float-left">
 									<i className="fa fa-heart fa-3x" style={{color:'white'}}></i>
 								</a>
-								<h5 className="mb-0 text-right text-primary pt-3"> $1,995.5</h5>
+								<h5 className="mb-0 text-right text-primary pt-3"> PHP1,995.5</h5>
 								<h5 className="text-muted text-right text-uppercase font-weight-bold font-xs"> Total Profit </h5>
-								<h6 className="text-muted text-right font-weight-bold font-xs">Upcoming -> $0.00/$0.00</h6>
+								<h6 className="text-muted text-right font-weight-bold font-xs">Upcoming -> PHP0.00/PHP0.00</h6>
 							</CardBody>
 						</Card>
 					</Col>
