@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-// import { UIIcon } from '@song88/react-components'
 import PropTypes from 'prop-types'
 import { withRouter, Link, Redirect } from 'react-router-dom'
 import {
@@ -13,7 +12,6 @@ import {
 	Row,
 	Alert,
 	FormGroup,
-	Label,
 	FormText,
 	Modal,
 	ModalBody
@@ -64,7 +62,7 @@ class Login extends Component {
 				captcha: '',
 				submitted: false,
 				captchaReset: true,
-				captchaRand: Math.floor(1001 + Math.random() * 9001),
+				captchaRand: Math.floor(100001 + Math.random() * 900001),
 			})
 		}
 	}
@@ -106,9 +104,9 @@ class Login extends Component {
 
 		this.setState({ submitted: true })
 
-		this.setState({
-			captchaRand: Math.floor(100000 + Math.random() * 900000)
-		})
+		// this.setState({
+		// 	captchaRand: Math.floor(100000 + Math.random() * 900000)
+		// })
 
 		if (username && password && captcha && parseNumber(captchaRand) === parseNumber(captcha)) {
 			doLogin(username, password);
@@ -196,7 +194,6 @@ class Login extends Component {
 										</InputGroupText>
 									</InputGroupAddon>
 
-
 									<FormattedMessage id="Accounts.Username" defaultMessage="Username" >
 										{usernamefm =>
 											<Input
@@ -233,8 +230,6 @@ class Login extends Component {
 											<i id="passwordEye" onClick={this.togglePassword} className={`fa ${(passwordFieldType === 'password') ? `fa-eye-slash` : `fa-eye`} fa-lg`}></i>
 										</InputGroupText>
 									</InputGroupAddon>
-
-
 
 								</InputGroup>
 								{submitted && !password &&
@@ -314,9 +309,6 @@ class Login extends Component {
 							<ModalBody className="red-modal">
 								<div>
 									<div style={{ display: 'flex', justifyContent: 'center' }}>
-										<div>
-											{/* <UIIcon type="warning" size={40} /> */}
-										</div>
 										<div>
 											<label style={{ fontSize: "16px", fontFamily: 'Arial', fontWeight: "bold", marginLeft: "5px", marginTop: "15px" }}>
 												{isMultipleSession ?
