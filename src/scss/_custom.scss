@@ -10,6 +10,8 @@ $row-color-1: $dark-green;
 $row-color-2: #f3f3f3;
 $row-color-3: $light-green;
 $button-color-transparent: #04880b;
+$greenss: #a5f1af;
+$sample: #A32727;
 /*CSS FOR RESPONSIVE TABLE Start 
 	*********************************/
 .responsive-table {
@@ -99,9 +101,9 @@ input.green-disable:disabled::placeholder {
 
 .btn-danger.disabled,
 .btn-danger:disabled {
-  background-color: #f2f2f2 !important;
-  border-color: $light-green !important;
+  background: #f2f2f2;
   color: $dark-green;
+  border-color: $light-green !important;
   cursor: not-allowed;
 }
 
@@ -152,13 +154,20 @@ input {
 }
 
 .btn {
+  font-size: 1em;
+  padding: .4em;
+  width: 12em;
+  border-radius: 2px;
+  border: 2px solid $dark-green;
+  background: $true-gray;
   color: $white;
-  background-color: $true-gray;
-  border-color: $true-gray;
-  border-radius: 3px;
 
   &:hover {
     background-color: $dark-gray;
+    background: $white;
+    color: $true-gray;
+    border-radius: 2px;
+    border: 2px solid $button-color-transparent;
 
     .fa-refresh {
       color: $white;
@@ -169,4 +178,23 @@ input {
 .btn-group > .btn {
   background: transparent !important;
   color: #000 !important;
+}
+
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
 }

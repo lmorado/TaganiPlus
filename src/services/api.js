@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_ROOT = `http://localhost:8080/api`
+const API_ROOT = `http://localhost:62074`
 
 const handleErrors = async (error) => {
 
@@ -19,7 +19,7 @@ const handleErrors = async (error) => {
 
 
 const handleResponse = res => {
-    return res && res.data
+    return res
 }
 
 const beforeRequest = async (config) => {
@@ -68,7 +68,7 @@ const requests = {
 
 const Auth = {
     login: (username, password) =>
-        requests.post('/v1/Authentication/login', { username, password }),
+        requests.post('/api/account/login', { username, password }),
     validatePin: (userId, pin) =>
         requests.post('/v1/Authentication/securitycode', { UserId: userId, SecurityCode: pin }),
     createPin: (userId, pin) =>

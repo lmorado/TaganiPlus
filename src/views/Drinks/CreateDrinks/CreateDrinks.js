@@ -125,7 +125,7 @@ class CreateDrinks extends Component {
 									{showMsg &&
 										<Alert color="success">
 											Drink successfully added
-                                </Alert>}
+                                	</Alert>}
 
 									<FormGroup>
 										<Label for="drinkName"> Name :  </Label>

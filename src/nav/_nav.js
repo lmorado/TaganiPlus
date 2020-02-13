@@ -1,68 +1,96 @@
 export default {
   items: [
     {
-      name: 'Drinks',
-      url: '/drinks',
+      name: 'Dashboard',
+      url: '/main/index',
       id: 'Drinks',
       icon: 'icon-cup',
-      children: [
-        {
-          name: 'Create',
-          url: '/drinks/create',
-          icon: 'icon-pencil',
-        },
-        {
-          name: 'Drinks',
-          url: '/drinks/list',
-          icon: 'icon-list',
-        },
-      ],
       value: 'Drksz',
     },
     {
-      name: 'Test Route 2',
-      id: 'Tr2',
-      url: '/tr-2',
-      icon: 'icon-cursor',
-      value: 'tr-2',
+      name: 'Inputs',
+      id: 'Inputs',
+      url: '/inputs',
+      icon: 'icon-rocket',
+      value: 'inputs',
       children: [
         {
-          name: 'Test Route 2 Ch1',
-          url: '/tr-2/a',
-          icon: 'icon-puzzle',
+          name: 'Manage Inputs',
+          url: '/inputs/list',
+          icon: 'icon-list',
         },
         {
-          name: 'Test Route 2 Ch2',
-          url: '/tr-2/b',
-          icon: 'icon-puzzle',
+          name: 'Growing Media',
+          url: '/inputs/media',
+          icon: 'icon-list',
         },
         {
-          name: 'Test Route 2 Ch3',
-          url: '/tr-2/c',
-          icon: 'icon-puzzle',
+          name: 'Fertilizer',
+          url: '/inputs/fertilizer',
+          icon: 'icon-list',
+        },
+        {
+          name: 'Seeds',
+          url: '/inputs/seeds',
+          icon: 'icon-list',
         }
-      ]
+      ],
+    },
+
+    {
+      name: 'Crops',
+      id: 'Tr2',
+      url: '/drinks',
+      icon: 'icon-cursor',
+      value: 'drinks',
     },
     {
-      name: 'Basic Equipments',
-      id: 'equipments',
-      url: '/equipments',
-      icon: 'icon-rocket',
-      value: 'equipments',
-    },
-    {
-      name: 'Activities',
-      id: 'activities',
-      url: '/activities',
+      name: 'Finance',
+      id: 'finance',
+      url: '/finance',
       icon: 'icon-camrecorder',
-      value: 'activities',
+      value: 'finance',
+      children: [
+        {
+          name: 'Accounts',
+          url: '/finance/accounts',
+          icon: 'fa fa-money',
+        },
+        {
+          name: 'Transfers',
+          url: '/finance/transfers',
+          icon: 'fa fa-money',
+        },
+        {
+          name: 'Transactions',
+          url: '/finance/transactions',
+          icon: 'fa fa-money',
+        },
+        {
+          name: 'Reconciliations',
+          url: '/finance/reconciliations',
+          icon: 'fa fa-money',
+        }
+      ],
     },
     {
-      name: 'Financial Reports',
+      name: 'Reports',
       id: 'reports',
       url: '/reports',
       icon: 'icon-paper-clip',
       value: 'reports',
+      children: [
+        {
+          name: 'Income Summary',
+          url: '/reports/income',
+          icon: 'fa fa-money',
+        },
+        {
+          name: 'Expense Summary',
+          url: '/reports/expense',
+          icon: 'fa fa-shopping-cart',
+        }
+      ],
     },
   ]
 };
