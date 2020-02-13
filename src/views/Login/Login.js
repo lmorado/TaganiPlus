@@ -47,7 +47,7 @@ class Login extends Component {
 			password: '',
 			submitted: false,
 			captcha: '',
-			captchaRand: Math.floor(100000 + Math.random() * 900000),
+			captchaRand: Math.floor(1000 + Math.random() * 9000),
 			passwordFieldType: 'password',
 			isCaptchaDidNotMatch: false,
 			captchaReset: false,
@@ -62,7 +62,7 @@ class Login extends Component {
 				captcha: '',
 				submitted: false,
 				captchaReset: true,
-				captchaRand: Math.floor(100001 + Math.random() * 900001),
+				captchaRand: Math.floor(1001 + Math.random() * 9001),
 			})
 		}
 	}
@@ -104,9 +104,9 @@ class Login extends Component {
 
 		this.setState({ submitted: true })
 
-		// this.setState({
-		// 	captchaRand: Math.floor(100000 + Math.random() * 900000)
-		// })
+		this.setState({
+			captchaRand: Math.floor(1000 + Math.random() * 9000)
+		})
 
 		if (username && password && captcha && parseNumber(captchaRand) === parseNumber(captcha)) {
 			doLogin(username, password);

@@ -53,9 +53,9 @@ export const doLogin = (username, password) => {
         }
         else if (result.error && result.status >= 500) {
             if (result.data === undefined && result.status === undefined) {
-                dispatch(loginFailure("Something went wrong."))
+                dispatch(loginFailure("Something went wrong1."))
             } else {
-                dispatch(loginFailure("Something went wrong."))
+                dispatch(loginFailure("Something went wrong2."))
             }
         }
         else {
@@ -75,7 +75,7 @@ export const doLogin = (username, password) => {
 
                     dispatch(loginSuccess(result.result))
                 } else {
-                    dispatch(loginFailure("Something went wrong."))
+                    dispatch(loginFailure("Something went wrong3."))
                 }
             }
         }

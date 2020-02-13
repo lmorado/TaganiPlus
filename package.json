@@ -43,7 +43,7 @@
     "text-mask-addons": "^3.8.0"
   },
   "scripts": {
-    "start": "set PORT=81 && react-scripts start",
+    "start": "set PORT=82 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
