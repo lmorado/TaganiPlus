@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const StyledContainer = styled.div`
     width: 100%;
+    height: 70%;
     margin-right: auto;
     margin-left: auto;
     position: absolute;
@@ -51,7 +52,7 @@ export const StyledForm = styled.form`
     -webkit-font-smoothing: antialiased;
     font-size:14px;
     margin:auto;
-    overflow-y:auto;
+    overflow-y:none;
     background-color: #fafafa;
     border-radius: 3px;
     border: 1px solid #7b7b7b;
@@ -59,7 +60,6 @@ export const StyledForm = styled.form`
 	min-width: 600px;
 	max-width: 900px;
 	min-height: 200px;
-	max-height: 500px;
 `
 
 
@@ -82,7 +82,7 @@ export const StyledSubheader = styled.div`
 export const StyledPage = styled.div`
     margin:0;
 	height: 105vh;
-	min-width: 320px;
+	min-width: 300px;
 `
 
 export const RedContainer = styled.div`
@@ -110,7 +110,7 @@ export const ProgressInTracker = styled.div`
 `
 
 export const TaganiHeader = styled.div`
-    height: 10%;
+    height: 75px;
     width: 100%;
     background: #216438;
 `

@@ -243,9 +243,7 @@ class Register extends Component {
 			iagree,
 			isMultipleSession,
 			SW,
-			demo, 
-
-			percentage,
+			demo
 		} = this.state
 		const { message, hasError, loading } = this.props
 		if (this.props.userId) {
@@ -254,21 +252,19 @@ class Register extends Component {
 
 		return (
 			<IntlProvider locale="en">
-			<StyledPage>
-				<TaganiHeader></TaganiHeader>
-				<RedContainer>
-				<StyledContainer>
-					<Row>
-						<Col md="6"></Col>
-						<Col md="4">
-							<ProgressBar percentage={this.state.percentage}/>
-						</Col>
-					</Row>
-					<Wizard>
-						<Steps>
-						<Step
-							id="first"
-							render={({ next }) => (
+			<Wizard>
+				<Steps>
+				<Step
+					id="first"
+					render={({ next }) => (
+						<StyledPage style={{height:'150vh'}}>
+						<TaganiHeader></TaganiHeader>
+						<RedContainer>
+						<StyledContainer>
+							<Col md="4" style={{position:'absolute', right:'250px'}}>
+								<ProgressBar percentage={this.state.percentage}/>
+							</Col>
+							<div style={{ display: 'block', height: '65px', margin: 'auto', paddingBottom: '24px' }}></div>
 							<StyledForm>
 								<StyledHeader>{registerFormattedMessage.signintya}</StyledHeader>
 								<div style={{ display: 'block', width: '258px', margin: 'auto', paddingBottom: '24px' }}></div>
@@ -306,7 +302,6 @@ class Register extends Component {
 										<FormText className="help-block red-normal">{registerFormattedMessage.lastname} {registerFormattedMessage.isrequired}</FormText>
 									}
 								</FormGroup>
-				
 								<FormGroup >
 									<Row>
 										<Col md="6">
@@ -351,7 +346,6 @@ class Register extends Component {
 										</Col>
 									</Row>
 								</FormGroup>
-				
 								<FormGroup>
 									<Row>
 										<Col md="6">
@@ -390,7 +384,6 @@ class Register extends Component {
 										</Col>
 									</Row>
 								</FormGroup>
-
 								<FormGroup>
 									<Row>
 										<Col md="6">
@@ -429,7 +422,6 @@ class Register extends Component {
 										</Col>
 									</Row>
 								</FormGroup>
-				
 								<FormGroup>
 									<Row>
 										<Col md="6">
@@ -482,7 +474,6 @@ class Register extends Component {
 										</Col>
 									</Row>
 								</FormGroup>
-								
 								<FormGroup>
 									<StyledLabel>{registerFormattedMessage.mailingaddress1} : (Street Address)</StyledLabel>
 									<InputGroup className={(submitted && !mailingaddress1 ? ' has-error' : '')}>
@@ -517,7 +508,6 @@ class Register extends Component {
 										<FormText className="help-block red-normal">{registerFormattedMessage.mailingaddress2} {registerFormattedMessage.isrequired}</FormText>
 									}
 								</FormGroup>
-
 								<FormGroup>
 									<Row>
 										<Col md="6">
@@ -556,7 +546,6 @@ class Register extends Component {
 										</Col>
 									</Row>
 								</FormGroup>
-
 								<FormGroup>
 									<Row>
 										<Col md="6">
@@ -612,14 +601,12 @@ class Register extends Component {
 										<FormText className="help-block red-normal">{registerFormattedMessage.country} {registerFormattedMessage.isrequired}</FormText>
 									}
 								</FormGroup>
-								<div style={{ display: 'block', height: '50px', margin: 'auto', paddingBottom: '24px' }}></div>
 								{hasError && message &&
 									<Alert color="danger">
 										{message}
 									</Alert>
 								}
-
-								<Row style={{ transition: "all 1s ease-in-out", marginTop: 15, position: "absolute", right: "250", bottom: "0" }}>
+								<Row style={{ transition: "all 1s ease-in-out", marginTop: 15}}>
 									<Col>
 										<Input 
 											type="checkbox"
@@ -646,11 +633,22 @@ class Register extends Component {
 									</Col>
 								</Row>
 							</StyledForm>
-							)}
-						/>
-						<Step
-							id="second"
-							render={({ next, previous }) => (
+						</StyledContainer>
+						</RedContainer>
+						</StyledPage>
+					)}
+				/>
+				<Step
+					id="second"
+					render={({ next, previous }) => (
+						<StyledPage>
+						<TaganiHeader></TaganiHeader>
+						<RedContainer>
+						<StyledContainer>
+							<Col md="4" style={{position:'absolute', right:'250px'}}>
+								<ProgressBar percentage={this.state.percentage}/>
+							</Col>
+							<div style={{ display: 'block', height: '65px', margin: 'auto', paddingBottom: '24px' }}></div>
 							<StyledForm>
 								<StyledHeader>You're almost there!</StyledHeader>
 								<div style={{ display: 'block', height: '50px', margin: 'auto', paddingBottom: '24px' }}></div>
@@ -697,11 +695,23 @@ class Register extends Component {
 									</Col>
 								</Row>
 							</StyledForm>
-							)}
-						/>
-						<Step
-							id="third"
-							render={({ next, previous }) => (
+						</StyledContainer>
+						</RedContainer>
+						</StyledPage>
+
+					)}
+				/>
+				<Step
+					id="third"
+					render={({ next, previous }) => (
+						<StyledPage>
+						<TaganiHeader></TaganiHeader>
+						<RedContainer>
+						<StyledContainer>
+							<Col md="4" style={{position:'absolute', right:'250px'}}>
+								<ProgressBar percentage={this.state.percentage}/>
+							</Col>
+							<div style={{ display: 'block', height: '65px', margin: 'auto', paddingBottom: '24px' }}></div>
 							<StyledForm onSubmit={this.handleLogin}>
 								<StyledHeader>Tagani Support Center</StyledHeader>
 								<div style={{ display: 'block', width: '258px', margin: 'auto', paddingBottom: '24px' }}></div>
@@ -761,11 +771,22 @@ class Register extends Component {
 									</Col>
 								</Row>
 							</StyledForm>
-							)}
-						/>
-						<Step
-							id="fourth"
-							render={({ previous }) => (
+						</StyledContainer>
+						</RedContainer>
+						</StyledPage>
+					)}
+				/>
+				<Step
+					id="fourth"
+					render={({ previous }) => (
+						<StyledPage>
+						<TaganiHeader></TaganiHeader>
+						<RedContainer>
+						<StyledContainer>
+							<Col md="4" style={{position:'absolute', right:'250px'}}>
+								<ProgressBar percentage={this.state.percentage}/>
+							</Col>
+							<div style={{ display: 'block', height: '65px', margin: 'auto', paddingBottom: '24px' }}></div>
 							<StyledForm onSubmit={this.handleLogin}>
 								<StyledHeader>Welcome to Tagani, {this.state.firstname}! </StyledHeader>
 								<div style={{ display: 'block', width: '258px', margin: 'auto', paddingBottom: '24px' }}></div>
@@ -808,13 +829,13 @@ class Register extends Component {
 									</Col>
 								</Row>
 							</StyledForm>
-							)}
-						/>
-						</Steps>
-					</Wizard>
-					</StyledContainer>
-				</RedContainer>
-			</StyledPage>
+						</StyledContainer>
+						</RedContainer>
+						</StyledPage>
+					)}
+				/>
+				</Steps>
+			</Wizard>
 			</IntlProvider>
 			
 		);
