@@ -3,6 +3,7 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import '../scss/App.scss';
 import DefaultLayout from '../default-layout/';
 import { Login } from '../views/Login'
+import Register from '../views/Register'
 import { SecurityCode } from '../views/SecurityCode'
 import { ResetPassword } from '../views/ResetPassword'
 import PrivateRoute from './privateRoute'
@@ -13,6 +14,7 @@ export default () => (
     <BrowserRouter>
         <Switch>
             <Route path="/login" name="Login Page" component={Login} />
+            <Route path="/register" name="Register Page" component={Register} />
             <Route path="/security-code" name="Security Code Page" component={SecurityCode} />
             <Route path="/password-reset" name="Reset Password" component={ResetPassword} />
             <Route path="/hierarchy/:userId" render={props => <Hierarchy {...props} />} />

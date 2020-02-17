@@ -19,7 +19,7 @@ const handleErrors = async (error) => {
 
 
 const handleResponse = res => {
-    return res && res.data
+    return res
 }
 
 const beforeRequest = async (config) => {

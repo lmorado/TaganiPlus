@@ -1,83 +1,83 @@
 import {
-    LOGIN_REQUEST,
-    LOGIN_FAILURE,
-    LOGIN_SUCCESS,
+    REGISTER_REQUEST,
+    REGISTER_FAILURE,
+    REGISTER_SUCCESS,
     LOGOUT_SUCCESS,
-} from '../../constants/auth'
+} from '../../constants/register'
 import { navigateToPage } from '../../utils/helpers'
 import { getLocalStorage, saveLocalStorage, removeLocalStorage } from '../../utils/localStorage'
 import api from '../../services/api'
 
 import { invalidInputs, userLocked } from '../../utils/actionsTranslation'
 
-// Login user
-const loginRequest = (username) => {
-    return { username: username, type: LOGIN_REQUEST }
+// Register user
+const registerRequest = (username) => {
+    return { username: username, type: REGISTER_REQUEST }
 }
 
-const loginFailure = (error) => {
-    return dispatch => dispatch({ type: LOGIN_FAILURE, payload: error })
+const registerFailure = (error) => {
+    return dispatch => dispatch({ type: REGISTER_FAILURE, payload: error })
 }
 
-const loginSuccess = (response) => {
-    return dispatch => dispatch({ type: LOGIN_SUCCESS, payload: response })
+const registerSuccess = (response) => {
+    return dispatch => dispatch({ type: REGISTER_SUCCESS, payload: response })
 }
 
-export const doLogin = (username, password) => {
+export const doRegister = (username, password) => {
     return async dispatch => {
 
-        dispatch(loginRequest(username))
+        dispatch(registerRequest(username))
 
-        const result = await api.Auth.login(username, password)
+        const result = await api.Auth.register(username, password)
         console.log(result);
         if (result.error && result.status === 401) {
             if (result.data === undefined && result.status === undefined) {
-                dispatch(loginFailure(invalidInputs()))
+                dispatch(registerFailure(invalidInputs()))
             } else {
-                dispatch(loginFailure(invalidInputs()))
+                dispatch(registerFailure(invalidInputs()))
             }
         }
         else if (result.error && result.status === 403) {
             if (result.data === undefined && result.status === undefined) {
-                dispatch(loginFailure(userLocked()))
+                dispatch(registerFailure(userLocked()))
             } else {
-                dispatch(loginFailure(userLocked()))
+                dispatch(registerFailure(userLocked()))
             }
         }
 
         else if (result.error && result.status === 404) {
             if (result.data === undefined && result.status === undefined) {
-                dispatch(loginFailure("Page not found."))
+                dispatch(registerFailure("Page not found."))
             } else {
-                dispatch(loginFailure("Page not found."))
+                dispatch(registerFailure("Page not found."))
             }
         }
         else if (result.error && result.status >= 500) {
             if (result.data === undefined && result.status === undefined) {
-                dispatch(loginFailure("Something went wrong1."))
+                dispatch(registerFailure("Something went wrong1."))
             } else {
-                dispatch(loginFailure("Something went wrong2."))
+                dispatch(registerFailure("Something went wrong2."))
             }
         }
         else {
             if (result.result && result.result.status === "Lock") {
-                dispatch(loginFailure(userLocked()))
+                dispatch(registerFailure(userLocked()))
             } else {
                 if (result.data) {
                     console.log(result.data.userId);
                     const isLanguageSelected = getLocalStorage('locale')
                     const userId = result.data.userId
-                    // const isFirstTimeLogin = result.result.isFirstTimeLogin
+                    // const isFirstTimeRegister = result.result.isFirstTimeRegister
                     localStorage.setItem('userId', JSON.stringify(userId))
-                    // localStorage.setItem('isFirstTimeLogin', JSON.stringify(isFirstTimeLogin))
+                    // localStorage.setItem('isFirstTimeRegister', JSON.stringify(isFirstTimeRegister))
 
                     if (!isLanguageSelected) {
                         saveLocalStorage('locale', 'en')
                     }
 
-                    dispatch(loginSuccess(result.result))
+                    dispatch(registerSuccess(result.result))
                 } else {
-                    dispatch(loginFailure("Something went wrong3."))
+                    dispatch(registerFailure("Something went wrong3."))
                 }
             }
         }
@@ -95,7 +95,7 @@ export const doLogout = () => {
         removeLocalStorage('userId')
         removeLocalStorage('user')
         removeLocalStorage('userToken')
-        removeLocalStorage('isFirstTimeLogin');
+        removeLocalStorage('isFirstTimeRegister');
         removeLocalStorage('setNicknameLater')
         navigateToPage()
     }

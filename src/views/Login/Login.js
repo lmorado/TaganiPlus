@@ -18,7 +18,7 @@ import {
 } from 'reactstrap';
 import { doLogin } from '../../actions/auth'
 import { parseNumber } from '../../utils/helpers'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, IntlProvider } from 'react-intl'
 import { getLocalStorage, removeLocalStorage } from '../../utils/localStorage'
 
 import { StyledContainer, StyledButton, StyledLabel, StyledForm, StyledHeader, StyledSubheade, StyledPage, RedContainer } from './styles'
@@ -178,6 +178,7 @@ class Login extends Component {
 		}
 
 		return (
+			<IntlProvider locale="en">
 			<StyledPage>
 				<RedContainer>
 					<StyledContainer>
@@ -336,6 +337,7 @@ class Login extends Component {
 					</StyledContainer>
 				</RedContainer>
 			</StyledPage>
+			</IntlProvider>
 		);
 	}
 }
