@@ -19,10 +19,14 @@ import {
 import { doLogin } from '../../actions/auth'
 import { parseNumber } from '../../utils/helpers'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { FormattedMessage, IntlProvider } from 'react-intl'
 =======
 import { FormattedMessage } from 'react-intl'
 >>>>>>> feature/tag-01/equipment
+=======
+import { FormattedMessage, IntlProvider } from 'react-intl'
+>>>>>>> upstream/feature/tag-01/equipment
 import { getLocalStorage, removeLocalStorage } from '../../utils/localStorage'
 
 import { StyledContainer, StyledButton, StyledLabel, StyledForm, StyledHeader, StyledSubheade, StyledPage, RedContainer } from './styles'
@@ -183,9 +187,13 @@ class Login extends Component {
 
 		return (
 <<<<<<< HEAD
+<<<<<<< HEAD
 			<IntlProvider locale="en">
 =======
 >>>>>>> feature/tag-01/equipment
+=======
+			<IntlProvider locale="en">
+>>>>>>> upstream/feature/tag-01/equipment
 			<StyledPage>
 				<RedContainer>
 					<StyledContainer>
@@ -345,9 +353,13 @@ class Login extends Component {
 				</RedContainer>
 			</StyledPage>
 <<<<<<< HEAD
+<<<<<<< HEAD
 			</IntlProvider>
 =======
 >>>>>>> feature/tag-01/equipment
+=======
+			</IntlProvider>
+>>>>>>> upstream/feature/tag-01/equipment
 		);
 	}
 }
