@@ -1,11 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import StepWizard from 'react-step-wizard'
 import {Wizard, Steps, Step} from 'react-albus'
-import { withRouter, Link, Redirect } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import {
-	Button,
 	Col,
 	Input,
 	InputGroup,
@@ -14,9 +12,7 @@ import {
 	Row,
 	Alert,
 	FormGroup,
-	FormText,
-	Modal,
-	ModalBody
+	FormText
 } from 'reactstrap';
 import { doRegister } from '../../actions/register'
 import { parseNumber } from '../../utils/helpers'
@@ -67,27 +63,27 @@ class Register extends Component {
 		super(props)
 
 		this.state = {
-			firstname: '',
-			lastname: '',
-			birthday: '',
-			gender: '',
-			homenumber: '',
-			mobilephone: '',
+			firstname: null,
+			lastname: null,
+			birthday: null,
+			gender: null,
+			homenumber: null,
+			mobilephone: null,
 
-			emailaddress: '',
-			confirmemailaddress: '',
-			password: '',
-			confirmpassword: '',
+			emailaddress: null,
+			confirmemailaddress: null,
+			password: null,
+			confirmpassword: null,
 
-			mailingaddress1: '',
-			mailingaddress2: '',
-			barangay: '',
-			municipality: '',
-			province: '',
-			postalcode: '',
-			country: '',
+			mailingaddress1: null,
+			mailingaddress2: null,
+			barangay: null,
+			municipality: null,
+			province: null,
+			postalcode: null,
+			country: null,
 			
-			iagree: '',
+			iagree: null,
 
 			username: '',
 			submitted: false,
@@ -100,6 +96,27 @@ class Register extends Component {
 			isMultipleSession: true,
 
 			percentage:25,
+
+			errors: {
+				firstname: '',
+				lastname: '',
+				birthday: '',
+				gender: '',
+				homenumber: '',
+				mobilephone: '',
+				emailaddress: '',
+				confirmemailaddress: '',
+				password: '',
+				confirmpassword: '',
+				mailingaddress1: '',
+				mailingaddress2: '',
+				barangay: '',
+				municipality: '',
+				province: '',
+				postalcode: '',
+				country: '',
+				iagree: '',
+			}
 		}
 	}
 
@@ -133,8 +150,77 @@ class Register extends Component {
 		}
 	}
 
+
 	handleChange = (e) => {
+		e.preventDefault();
+		const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+		const validDate = RegExp(/^(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d$/i);
+		const validNumber = RegExp(/^(\+639\d\d\d\d\d\d\d\d\d)$/i)
+		const { name, value} = e.target
+		let errors = this.state.errors;
+
+		switch (name) {
+			case 'firstname': 
+			  errors.firstname = 
+				value.length < 2
+				  ? 'First Name must be atleast 2 characters long!'
+				  : '';
+			  break;
+			case 'lastname': 
+			  errors.lastname = 
+				value.length < 2
+				  ? 'Last Name must be atleast 2 characters long!'
+				  : '';
+			  break;
+			case 'birthday': 
+			  errors.birthday = 
+			  	validDate.test(value)
+				  ? 'Date is invalid!'
+				  : '';
+			  break;
+			case 'homenumber': 
+			  errors.homenumber = 
+			  	value.length < 3
+				  ? 'Home Number is invalid!'
+				  : '';
+			  break;
+			case 'mobilephone': 
+			  errors.mobilephone = 
+			  	validNumber.test(value)
+				  ? 'Mobile PHone Number is invalid!'
+				  : '';
+			  break;
+			case 'emailaddress': 
+			  errors.emailaddress = 
+				validEmailRegex.test(value)
+				  ? 'Email Address is invalid!'
+				  : '';
+			  break;
+			case 'confirmemailaddress': 
+			  errors.confirmemailaddress = 
+				validEmailRegex.test(value) && value == this.state.emailaddress
+				  ? 'Email Address is invalid!'
+				  : '';
+			  break;
+			case 'password': 
+			  errors.password = 
+				value.length < 8
+				  ? 'Password must be 8 characters long!'
+				  : '';
+			  break;
+			case 'confirmpassword': 
+			  errors.confirmpassword = 
+				value.length < 8 && value == this.state.password
+				  ? 'Password must be 8 characters long!'
+				  : '';
+			  break;
+			default:
+			  break;
+		  }
 		this.setState({ [e.target.name]: e.target.value })
+		this.setState({errors, [name]: value}, ()=> {
+			console.log(errors)
+		})
 	}
 
 	toggleMultipleRegisterModal = () => {
@@ -143,63 +229,40 @@ class Register extends Component {
 		removeLocalStorage('MultiSession')
 	}
 
+	handleValidation(){
+		let formIsValid = true;
+	}
+
 	handleRegister = (e) => {
 		e.preventDefault()
-		const { username, password, captcha, captchaRand } = this.state
 		const { doRegister } = this.props
-
 		this.setState({ submitted: true })
 
-		this.setState({
-			captchaRand: Math.floor(1000 + Math.random() * 9000)
-		})
-
-		if (username && password && captcha && parseNumber(captchaRand) === parseNumber(captcha)) {
-			doRegister(username, password);
+		if(this.handleValidation()){
+			doRegister();
 			this.setState({
 				isCaptchaDidNotMatch: false
 			})
-		}
-		else if (!captcha) {
+		}else{
 			this.setState({
-				captcha: '',
-				captchaReset: false,
-			})
-
-			if ((username || password)) {
-				this.setState({
-					captchaReset: false,
-					isCaptchaDidNotMatch: false,
-				})
-			}
-		}
-		else if (parseNumber(captchaRand) !== parseNumber(captcha)) {
-			if (!captcha) {
-				this.setState({
-					captcha: '',
-					isCaptchaDidNotMatch: false,
-					captchaReset: true
-				})
-			} else {
-				this.setState({
-					captcha: '',
-					isCaptchaDidNotMatch: true,
-					captchaReset: true
-				})
-			}
-		}
-		else {
-			this.setState({
-				captcha: '',
-				captchaReset: true,
+				isCaptchaDidNotMatch: true
 			})
 		}
 	}
+
 
 	togglePassword = e => {
 		if (e.target.id === 'passwordEye') {
 			this.setState({
 				passwordFieldType: this.state.passwordFieldType === 'password' ? 'input' : 'password'
+			})
+		}
+	}
+
+	toggleConfirmPassword = e => {
+		if (e.target.id === 'passwordEye') {
+			this.setState({
+				confirmpasswordFieldType: this.state.confirmpasswordFieldType === 'password' ? 'input' : 'password'
 			})
 		}
 	}
@@ -230,6 +293,7 @@ class Register extends Component {
 			password,
 			confirmpassword,
 			passwordFieldType, 
+			confirmpasswordFieldType, 
 
 			mailingaddress1,
 			mailingaddress2,
@@ -241,9 +305,6 @@ class Register extends Component {
 
 			submitted,
 			iagree,
-			isMultipleSession,
-			SW,
-			demo
 		} = this.state
 		const { message, hasError, loading } = this.props
 		if (this.props.userId) {
@@ -252,14 +313,14 @@ class Register extends Component {
 
 		return (
 			<IntlProvider locale="en">
+			<StyledPage>
+			<TaganiHeader></TaganiHeader>
+			<RedContainer>
 			<Wizard>
 				<Steps>
 				<Step
 					id="first"
 					render={({ next }) => (
-						<StyledPage style={{height:'150vh'}}>
-						<TaganiHeader></TaganiHeader>
-						<RedContainer>
 						<StyledContainer>
 							<Col md="4" style={{position:'absolute', right:'250px'}}>
 								<ProgressBar percentage={this.state.percentage}/>
@@ -276,9 +337,12 @@ class Register extends Component {
 												<Input
 													type="text"
 													name="firstname"
-													onChange={this.handleChange}
+													isrequired='true'
+													onChange={this.handleChange, this.handleValidation}
 													placeholder={firstnamefm}
-													value={firstname} />}
+													value={firstname}
+													
+												 />}
 										</FormattedMessage>
 									</InputGroup>
 									{submitted && !firstname &&
@@ -333,8 +397,8 @@ class Register extends Component {
 															placeholder={genderfm}
 															value={gender} 
 														>
-															<option>Male</option>
-															<option>Female</option>
+															<option value="1">Male</option>
+															<option value="2">Female</option>
 														</Input>
 													
 													}
@@ -454,7 +518,7 @@ class Register extends Component {
 												<FormattedMessage id="Accounts.ConfirmPassword" defaultMessage="Confirm Password" >
 													{confirmpasswordfm =>
 														<Input
-															type={(passwordFieldType === 'password') ? 'password' : 'text'}
+															type={(confirmpasswordFieldType === 'password') ? 'password' : 'text'}
 															name="confirmpassword"
 															onChange={this.handleChange}
 															value={confirmpassword}
@@ -463,7 +527,7 @@ class Register extends Component {
 												</FormattedMessage>
 												<InputGroupAddon addonType="append">
 													<InputGroupText>
-														<i id="passwordEye" onClick={this.togglePassword} className={`fa ${(passwordFieldType === 'password') ? `fa-eye-slash` : `fa-eye`} fa-lg`}></i>
+														<i id="passwordEye" onClick={this.toggleConfirmPassword} className={`fa ${(confirmpasswordFieldType === 'password') ? `fa-eye-slash` : `fa-eye`} fa-lg`}></i>
 													</InputGroupText>
 												</InputGroupAddon>
 				
@@ -474,6 +538,32 @@ class Register extends Component {
 										</Col>
 									</Row>
 								</FormGroup>
+								<Row style={{ transition: "all 1s ease-in-out", marginTop: 15}}>
+									<Col md="10"></Col>
+									<Col md="2">
+										<StyledButton
+											color="primary"
+											style={{ width: "100px" }}
+											disabled={loading}
+											onClick={next}
+										>
+											Next
+										</StyledButton>
+									</Col>
+								</Row>
+							</StyledForm>
+						</StyledContainer>
+					)}
+				/>
+				<Step
+					id="second"
+					render={({ next }) => (
+						<StyledContainer>
+							<Col md="4" style={{position:'absolute', right:'250px'}}>
+								<ProgressBar percentage={this.state.percentage}/>
+							</Col>
+							<div style={{ display: 'block', height: '65px', margin: 'auto', paddingBottom: '24px' }}></div>
+							<StyledForm onSubmit={this.handleRegister}>
 								<FormGroup>
 									<StyledLabel>{registerFormattedMessage.mailingaddress1} : (Street Address)</StyledLabel>
 									<InputGroup className={(submitted && !mailingaddress1 ? ' has-error' : '')}>
@@ -516,7 +606,7 @@ class Register extends Component {
 												<FormattedMessage id="Accounts.Province" defaultMessage="Province/Region" >
 													{provincefm =>
 														<Input
-															type="text"
+															type="select"
 															name="province"
 															onChange={this.handleChange}
 															placeholder={provincefm}
@@ -533,7 +623,7 @@ class Register extends Component {
 												<FormattedMessage id="Accounts.Municipality" defaultMessage="City/Municipality" >
 													{municipalityfm =>
 														<Input
-															type="text"
+															type="select"
 															name="municipality"
 															onChange={this.handleChange}
 															placeholder={municipalityfm}
@@ -554,7 +644,7 @@ class Register extends Component {
 												<FormattedMessage id="Accounts.Barangay" defaultMessage="Barangay" >
 													{barangayfm =>
 														<Input
-															type="text"
+															type="select"
 															name="barangay"
 															onChange={this.handleChange}
 															placeholder={barangayfm}
@@ -623,10 +713,7 @@ class Register extends Component {
 												width: "100px"
 											}}
 											disabled={loading}
-											onClick={() => {
-												next();
-												this.setState({percentage: this.state.percentage+25})
-											}}
+											onClick={next}
 										>
 											{registerFormattedMessage.register}
 										</StyledButton>
@@ -634,19 +721,14 @@ class Register extends Component {
 								</Row>
 							</StyledForm>
 						</StyledContainer>
-						</RedContainer>
-						</StyledPage>
 					)}
 				/>
 				<Step
-					id="second"
-					render={({ next, previous }) => (
-						<StyledPage>
-						<TaganiHeader></TaganiHeader>
-						<RedContainer>
+					id="third"
+					render={({ next }) => (
 						<StyledContainer>
 							<Col md="4" style={{position:'absolute', right:'250px'}}>
-								<ProgressBar percentage={this.state.percentage}/>
+								<ProgressBar percentage={this.state.percentage+25}/>
 							</Col>
 							<div style={{ display: 'block', height: '65px', margin: 'auto', paddingBottom: '24px' }}></div>
 							<StyledForm>
@@ -666,29 +748,13 @@ class Register extends Component {
 								</Row>
 								<div style={{ display: 'block', height: '50px', margin: 'auto', paddingBottom: '24px' }}></div>
 								<Row style={{ transition: "all 1s ease-in-out", marginTop: 15}}>
-									<Col md="8"></Col>
-									<Col md="2">	
-										<StyledButton
-											color="primary"
-											style={{ width: "100px" }}
-											disabled={loading}
-											onClick={() => {
-												previous();
-												this.setState({percentage: this.state.percentage-25})
-											}}
-										>
-											Previous
-										</StyledButton>
-									</Col>
+									<Col md="10"></Col>
 									<Col md="2">
 										<StyledButton
 											color="primary"
 											style={{ width: "100px" }}
 											disabled={loading}
-											onClick={() => {
-												next();
-												this.setState({percentage: this.state.percentage+25})
-											}}
+											onClick={next}
 										>
 											Next
 										</StyledButton>
@@ -696,146 +762,12 @@ class Register extends Component {
 								</Row>
 							</StyledForm>
 						</StyledContainer>
-						</RedContainer>
-						</StyledPage>
-
-					)}
-				/>
-				<Step
-					id="third"
-					render={({ next, previous }) => (
-						<StyledPage>
-						<TaganiHeader></TaganiHeader>
-						<RedContainer>
-						<StyledContainer>
-							<Col md="4" style={{position:'absolute', right:'250px'}}>
-								<ProgressBar percentage={this.state.percentage}/>
-							</Col>
-							<div style={{ display: 'block', height: '65px', margin: 'auto', paddingBottom: '24px' }}></div>
-							<StyledForm onSubmit={this.handleLogin}>
-								<StyledHeader>Tagani Support Center</StyledHeader>
-								<div style={{ display: 'block', width: '258px', margin: 'auto', paddingBottom: '24px' }}></div>
-								<Row>
-									<Col md="3">
-										<img src="https://tagani.ph/wp-content/uploads/2019/12/Group-6-Copy-4.jpg" style={{ width: 150, height: 150, borderRadius:75 }} />
-									</Col>
-									<Col md="9">
-										<StyledHeader style={{color:'#363636'}}>Hi, {this.state.firstname}! My name is Annie.</StyledHeader>
-										<ParaStyle style={{padding:'0'}}>I will be your dedicated Tagani Partner. I am here to help you get started and grow your agribusiness through Tagani PLUS! You can ﬁnd my contact details below, so feel free to contact me if you need help.</ParaStyle>
-									</Col>
-								</Row>
-								<Row>
-									<Col md="3"></Col>
-									<Col md="5">
-										<ParaStyle style={{padding:'0'}}><b>Phone:</b> +639176578884 </ParaStyle>
-										<ParaStyle style={{padding:'0'}}><b>Landline:</b> +63(02)86324741 </ParaStyle>
-										<ParaStyle style={{padding:'0'}}><b>Email:</b> annie@tagani.ph,support@tagani.ph </ParaStyle>
-									</Col>
-									<Col md="4">
-										<ResendButton
-											color="primary"
-											style={{ width: "100%", height: "50%"}}
-											disabled={loading}
-										>
-											Download
-										</ResendButton>
-									</Col>
-								</Row>
-								<Row style={{ transition: "all 1s ease-in-out", marginTop: 15 }}>
-									<Col md="8"></Col>
-									<Col md="2">
-										<StyledButton
-											color="primary"
-											style={{ width: "100px" }}
-											disabled={loading}
-											onClick={() => {
-												previous();
-												this.setState({percentage: this.state.percentage-25})
-											}}
-										>
-											Previous
-										</StyledButton>
-									</Col>
-									<Col md="2">
-										<StyledButton
-											color="primary"
-											style={{ width: "100px" }}
-											disabled={loading}
-											onClick={() => {
-												next();
-												this.setState({percentage: this.state.percentage+15})
-											}}
-										>
-											Get Started
-										</StyledButton>
-									</Col>
-								</Row>
-							</StyledForm>
-						</StyledContainer>
-						</RedContainer>
-						</StyledPage>
-					)}
-				/>
-				<Step
-					id="fourth"
-					render={({ previous }) => (
-						<StyledPage>
-						<TaganiHeader></TaganiHeader>
-						<RedContainer>
-						<StyledContainer>
-							<Col md="4" style={{position:'absolute', right:'250px'}}>
-								<ProgressBar percentage={this.state.percentage}/>
-							</Col>
-							<div style={{ display: 'block', height: '65px', margin: 'auto', paddingBottom: '24px' }}></div>
-							<StyledForm onSubmit={this.handleLogin}>
-								<StyledHeader>Welcome to Tagani, {this.state.firstname}! </StyledHeader>
-								<div style={{ display: 'block', width: '258px', margin: 'auto', paddingBottom: '24px' }}></div>
-								<ParaStyle style={{padding:'0'}}>In order to access more Tagani PLUS features, you need to accomplish the following assessments. <b>Annie</b>, your dedicated Tagani Partner, will be in contact with you to guide you in the process.</ParaStyle>
-								<div style={{ display: 'block', width: '258px', margin: 'auto', paddingBottom: '24px' }}></div>
-								<Row>
-								<Col md="4">
-									<BigButton>
-										<i className="fa fa-user-o fa-5x"></i>
-										<h4>Entrepreneurial Profile</h4>
-									</BigButton>
-								</Col>
-								<Col md="4">
-									<BigButton>
-										<i className="fa fa-map-marker fa-5x"></i>
-										<h4>Site Profile</h4>
-									</BigButton>
-								</Col>
-								<Col md="4">
-									<BigButton>
-										<i className="fa fa-search fa-5x"></i>
-										<h4>Site Audit</h4>
-									</BigButton>
-								</Col>
-								</Row>
-								<Row style={{ transition: "all 1s ease-in-out", marginTop: 15 }}>
-									<Col md="10"></Col>
-									<Col md="2">
-										<StyledButton
-											color="primary"
-											style={{ width: "100px" }}
-											disabled={loading}
-											onClick={() => {
-												previous();
-												this.setState({percentage: this.state.percentage-15})
-											}}
-										>
-											Back
-										</StyledButton>
-									</Col>
-								</Row>
-							</StyledForm>
-						</StyledContainer>
-						</RedContainer>
-						</StyledPage>
 					)}
 				/>
 				</Steps>
 			</Wizard>
+			</RedContainer>
+			</StyledPage>
 			</IntlProvider>
 			
 		);

@@ -17,7 +17,6 @@ const handleErrors = async (error) => {
     return result
 }
 
-
 const handleResponse = res => {
     return res
 }
@@ -25,8 +24,6 @@ const handleResponse = res => {
 const beforeRequest = async (config) => {
     return config
 }
-
-
 
 const createApi = () => {
     const api = axios.create({
@@ -75,7 +72,14 @@ const Auth = {
         requests.post('/v1/Authentication/securitycode/put', { UserId: userId, SecurityCode: pin })
 }
 
+const Places ={
+    region: () => requests.get('api/regions/get-regions'),
+    provinces: () => requests.get('api/regions/get-provinces'),
+    municipalities: () => requests.get('api/regions/get-municipalities'),
+    barangays: () => requests.get('api/regions/get-barangays')
+}
+
 
 export default {
-    Auth
+    Auth, Places
 }
