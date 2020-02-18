@@ -29,7 +29,10 @@ export const doLogin = (username, password) => {
         dispatch(loginRequest(username))
 
         const result = await api.Auth.login(username, password)
+<<<<<<< HEAD
         console.log(result);
+=======
+>>>>>>> feature/tag-01/equipment
         if (result.error && result.status === 401) {
             if (result.data === undefined && result.status === undefined) {
                 dispatch(loginFailure(invalidInputs()))
@@ -63,6 +66,7 @@ export const doLogin = (username, password) => {
             if (result.result && result.result.status === "Lock") {
                 dispatch(loginFailure(userLocked()))
             } else {
+<<<<<<< HEAD
                 if (result.data) {
                     console.log(result.data.userId);
                     const isLanguageSelected = getLocalStorage('locale')
@@ -70,6 +74,14 @@ export const doLogin = (username, password) => {
                     // const isFirstTimeLogin = result.result.isFirstTimeLogin
                     localStorage.setItem('userId', JSON.stringify(userId))
                     // localStorage.setItem('isFirstTimeLogin', JSON.stringify(isFirstTimeLogin))
+=======
+                if (result.result) {
+                    const isLanguageSelected = getLocalStorage('locale')
+                    const userId = result.result.userId
+                    const isFirstTimeLogin = result.result.isFirstTimeLogin
+                    localStorage.setItem('userId', JSON.stringify(userId))
+                    localStorage.setItem('isFirstTimeLogin', JSON.stringify(isFirstTimeLogin))
+>>>>>>> feature/tag-01/equipment
 
                     if (!isLanguageSelected) {
                         saveLocalStorage('locale', 'en')
