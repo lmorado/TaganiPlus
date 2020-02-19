@@ -11,11 +11,13 @@ import Transactions from '../views/Finance/Transactions'
 import Reconciliations from '../views/Finance/Reconciliations'
 import IncomeSummary from '../views/Reports/IncomeSummary'
 import ExpenseSummary from '../views/Reports/ExpenseSummary'
+import Welcome from '../views/Welcome'
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/main/index', exact: true, name: 'Dashboard', component: MainIndex, value: 'main_Index' },
   { path: '/login', exact: true, name: 'Login', component: LogIn, value: 'login' },
+  { path: '/welcome', exact: true, name: 'Welcome', component: Welcome, value: 'welcome' }, 
   // { path: '/register', exact: true, name: 'Register', component: Register, value: 'register' },
   { path: '/inputs/list', exact: true, name: 'Input List', component: ListInputs, value: 'list_Inputs' },
   { path: '/inputs/media', exact: true, name: 'Growing Media', component: GrowingMediaInputs, value: 'growong_media_Inputs' },
