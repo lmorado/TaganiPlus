@@ -9,99 +9,185 @@ import {
     GET_BARANGAY_FAILURE,
     GET_BARANGAY_SUCCESS,
 } from '../../constants/mailing'
-import { navigateToPage } from '../../utils/helpers'
-import { getLocalStorage, saveLocalStorage, removeLocalStorage } from '../../utils/localStorage'
 import api from '../../services/api'
-
 import { invalidInputs, userLocked } from '../../utils/actionsTranslation'
 
-// Login user
-const loginRequest = (username) => {
-    return { username: username, type: GET_PROVINCE_REQUEST }
+// Province get
+const provinceRequest = () => {
+    return { type: GET_PROVINCE_REQUEST }
 }
-
-const loginFailure = (error) => {
-    return dispatch => dispatch({ type: LOGIN_FAILURE, payload: error })
+const provinceFailure = (error) => {
+    return dispatch => dispatch({ type: GET_PROVINCE_FAILURE, payload: error })
 }
-
-const loginSuccess = (response) => {
-    return dispatch => dispatch({ type: LOGIN_SUCCESS, payload: response })
+const provinceSuccess = (response) => {
+    return dispatch => dispatch({ type: GET_PROVINCE_SUCCESS, payload: response })
 }
-
-export const doLogin = (username, password) => {
+export const getProvince = () => {
     return async dispatch => {
 
-        dispatch(loginRequest(username))
+        dispatch(provinceRequest())
 
-        const result = await api.Auth.login(username, password)
-        console.log(result);
+        const result = await api.Places.provinces()
         if (result.error && result.status === 401) {
             if (result.data === undefined && result.status === undefined) {
-                dispatch(loginFailure(invalidInputs()))
+                dispatch(provinceFailure(invalidInputs()))
             } else {
-                dispatch(loginFailure(invalidInputs()))
+                dispatch(provinceFailure(invalidInputs()))
             }
         }
         else if (result.error && result.status === 403) {
             if (result.data === undefined && result.status === undefined) {
-                dispatch(loginFailure(userLocked()))
+                dispatch(provinceFailure(userLocked()))
             } else {
-                dispatch(loginFailure(userLocked()))
+                dispatch(provinceFailure(userLocked()))
             }
         }
 
         else if (result.error && result.status === 404) {
             if (result.data === undefined && result.status === undefined) {
-                dispatch(loginFailure("Page not found."))
+                dispatch(provinceFailure("Page not found."))
             } else {
-                dispatch(loginFailure("Page not found."))
+                dispatch(provinceFailure("Page not found."))
             }
         }
         else if (result.error && result.status >= 500) {
             if (result.data === undefined && result.status === undefined) {
-                dispatch(loginFailure("Something went wrong1."))
+                dispatch(provinceFailure("Something went wrong1."))
             } else {
-                dispatch(loginFailure("Something went wrong2."))
+                dispatch(provinceFailure("Something went wrong2."))
             }
         }
         else {
             if (result.result && result.result.status === "Lock") {
-                dispatch(loginFailure(userLocked()))
+                dispatch(provinceFailure(userLocked()))
             } else {
                 if (result.data) {
-                    console.log(result.data.userId);
-                    const isLanguageSelected = getLocalStorage('locale')
-                    const userId = result.data.userId
-                    // const isFirstTimeLogin = result.result.isFirstTimeLogin
-                    localStorage.setItem('userId', JSON.stringify(userId))
-                    // localStorage.setItem('isFirstTimeLogin', JSON.stringify(isFirstTimeLogin))
-
-                    if (!isLanguageSelected) {
-                        saveLocalStorage('locale', 'en')
-                    }
-
-                    dispatch(loginSuccess(result.result))
+                    dispatch(provinceSuccess(result.data.data))
                 } else {
-                    dispatch(loginFailure("Something went wrong3."))
+                    dispatch(provinceFailure("Something went wrong."))
                 }
             }
         }
     }
 }
 
-// Logout user
-export const logoutSuccess = () => {
-    return dispatch => dispatch({ type: LOGOUT_SUCCESS })
-}
 
-export const doLogout = () => {
-    return dispatch => {
-        dispatch(logoutSuccess())
-        removeLocalStorage('userId')
-        removeLocalStorage('user')
-        removeLocalStorage('userToken')
-        removeLocalStorage('isFirstTimeLogin');
-        removeLocalStorage('setNicknameLater')
-        navigateToPage()
+// Municipality get
+const municipalityRequest = () => {
+    return { type: GET_MUNICIPALITY_REQUEST }
+}
+const municipalityFailure = (error) => {
+    return dispatch => dispatch({ type: GET_MUNICIPALITY_FAILURE, payload: error })
+}
+const municipalitySuccess = (response) => {
+    return dispatch => dispatch({ type: GET_MUNICIPALITY_SUCCESS, payload: response })
+}
+export const getMunicipality = () => {
+    return async dispatch => {
+
+        dispatch(municipalityRequest())
+
+        const result = await api.Places.municipalities()
+        if (result.error && result.status === 401) {
+            if (result.data === undefined && result.status === undefined) {
+                dispatch(municipalityFailure(invalidInputs()))
+            } else {
+                dispatch(municipalityFailure(invalidInputs()))
+            }
+        }
+        else if (result.error && result.status === 403) {
+            if (result.data === undefined && result.status === undefined) {
+                dispatch(municipalityFailure(userLocked()))
+            } else {
+                dispatch(municipalityFailure(userLocked()))
+            }
+        }
+
+        else if (result.error && result.status === 404) {
+            if (result.data === undefined && result.status === undefined) {
+                dispatch(municipalityFailure("Page not found."))
+            } else {
+                dispatch(municipalityFailure("Page not found."))
+            }
+        }
+        else if (result.error && result.status >= 500) {
+            if (result.data === undefined && result.status === undefined) {
+                dispatch(municipalityFailure("Something went wrong1."))
+            } else {
+                dispatch(municipalityFailure("Something went wrong2."))
+            }
+        }
+        else {
+            if (result.result && result.result.status === "Lock") {
+                dispatch(municipalityFailure(userLocked()))
+            } else {
+                if (result.data) {
+                    dispatch(municipalitySuccess(result.data.data))
+                } else {
+                    dispatch(municipalityFailure("Something went wrong."))
+                }
+            }
+        }
     }
 }
+
+
+// Barangay get
+const barangayRequest = () => {
+    return { type: GET_BARANGAY_REQUEST }
+}
+const barangayFailure = (error) => {
+    return dispatch => dispatch({ type: GET_BARANGAY_FAILURE, payload: error })
+}
+const barangaySuccess = (response) => {
+    return dispatch => dispatch({ type: GET_BARANGAY_SUCCESS, payload: response })
+}
+export const getBarangay = () => {
+    return async dispatch => {
+
+        dispatch(barangayRequest())
+
+        const result = await api.Places.barangays()
+        if (result.error && result.status === 401) {
+            if (result.data === undefined && result.status === undefined) {
+                dispatch(barangayFailure(invalidInputs()))
+            } else {
+                dispatch(barangayFailure(invalidInputs()))
+            }
+        }
+        else if (result.error && result.status === 403) {
+            if (result.data === undefined && result.status === undefined) {
+                dispatch(barangayFailure(userLocked()))
+            } else {
+                dispatch(barangayFailure(userLocked()))
+            }
+        }
+
+        else if (result.error && result.status === 404) {
+            if (result.data === undefined && result.status === undefined) {
+                dispatch(barangayFailure("Page not found."))
+            } else {
+                dispatch(barangayFailure("Page not found."))
+            }
+        }
+        else if (result.error && result.status >= 500) {
+            if (result.data === undefined && result.status === undefined) {
+                dispatch(barangayFailure("Something went wrong1."))
+            } else {
+                dispatch(barangayFailure("Something went wrong2."))
+            }
+        }
+        else {
+            if (result.result && result.result.status === "Lock") {
+                dispatch(barangayFailure(userLocked()))
+            } else {
+                if (result.data) {
+                    dispatch(barangaySuccess(result.data.data))
+                } else {
+                    dispatch(barangayFailure("Something went wrong."))
+                }
+            }
+        }
+    }
+}
+

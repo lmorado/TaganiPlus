@@ -13,7 +13,7 @@ const handleErrors = async (error) => {
         data: data,
         error: true
     }
-
+    
     return result
 }
 
@@ -36,7 +36,7 @@ const createApi = () => {
     api.interceptors.response.use(function (response) {
         return response
     })
-
+    
     return api
 }
 const requests = {
@@ -73,10 +73,10 @@ const Auth = {
 }
 
 const Places ={
-    region: () => requests.get('api/regions/get-regions'),
-    provinces: () => requests.get('api/regions/get-provinces'),
-    municipalities: () => requests.get('api/regions/get-municipalities'),
-    barangays: () => requests.get('api/regions/get-barangays')
+    region: () => requests.get('/api/regions/get-regions'),
+    provinces: () => requests.get('/api/regions/get-provinces'),
+    municipalities: () => requests.get('/api/regions/get-municipalities'),
+    barangays: () => requests.get('/api/regions/get-barangays')
 }
 
 

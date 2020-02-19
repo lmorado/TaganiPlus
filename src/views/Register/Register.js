@@ -15,6 +15,7 @@ import {
 	FormText
 } from 'reactstrap';
 import { doRegister } from '../../actions/register'
+import { getProvince, getBarangay, getMunicipality } from '../../actions/mailing'
 import { parseNumber } from '../../utils/helpers'
 import { FormattedMessage, IntlProvider } from 'react-intl'
 import { getLocalStorage, removeLocalStorage } from '../../utils/localStorage'
@@ -132,22 +133,9 @@ class Register extends Component {
 	}
 
 	componentDidMount() {
-		const isUserForcedLogout = getLocalStorage('userForcedLogout')
-		const isMultiSession = getLocalStorage('MultiSession')
-
-		if (isMultiSession || isUserForcedLogout) {
-
-			isMultiSession ?
-				this.setState({
-					isMultipleSession: true,
-					showErrorModal: true
-				}) :
-
-				this.setState({
-					isMultipleSession: false,
-					showErrorModal: true
-				})
-		}
+		this.props.getProvince()
+		this.props.getMunicipality()
+		this.props.getBarangay()
 	}
 
 
@@ -231,6 +219,8 @@ class Register extends Component {
 
 	handleValidation(){
 		let formIsValid = true;
+
+		return formIsValid
 	}
 
 	handleRegister = (e) => {
@@ -248,6 +238,11 @@ class Register extends Component {
 				isCaptchaDidNotMatch: true
 			})
 		}
+	}
+
+	provinceSelect = (e) => {
+		const { getProvince } = this.props
+		getProvince();
 	}
 
 
@@ -279,6 +274,7 @@ class Register extends Component {
 	}
 
 	render() {
+		const { provinceData, barangayData, municipalityData } = this.props
 
 		const { 
 			firstname,
@@ -337,7 +333,7 @@ class Register extends Component {
 												<Input
 													type="text"
 													name="firstname"
-													isrequired='true'
+													required='true'
 													onChange={this.handleChange, this.handleValidation}
 													placeholder={firstnamefm}
 													value={firstname}
@@ -610,7 +606,15 @@ class Register extends Component {
 															name="province"
 															onChange={this.handleChange}
 															placeholder={provincefm}
-															value={province} />}
+															value={province}
+														>
+														{provinceData ? provinceData.map((data,i) => {
+															return (
+																<option id={i} value={data.id}>{data.name}</option>
+															)
+														}): null}
+														</Input>
+													}
 												</FormattedMessage>
 											</InputGroup>
 											{submitted && !province &&
@@ -627,7 +631,15 @@ class Register extends Component {
 															name="municipality"
 															onChange={this.handleChange}
 															placeholder={municipalityfm}
-															value={municipality} />}
+															value={municipality}
+														>
+														{municipalityData ? municipalityData.map((data,i) => {
+															return (
+																<option id={i} value={data.id}>{data.name}</option>
+															)
+														}): null}
+														</Input>
+													}
 												</FormattedMessage>
 											</InputGroup>
 											{submitted && !municipality &&
@@ -648,7 +660,15 @@ class Register extends Component {
 															name="barangay"
 															onChange={this.handleChange}
 															placeholder={barangayfm}
-															value={barangay} />}
+															value={barangay}
+														>
+														{barangayData ? barangayData.map((data,i) => {
+															return (
+																<option id={i} value={data.id}>{data.name}</option>
+															)
+														}): null}
+														</Input>
+													}
 												</FormattedMessage>
 											</InputGroup>
 											{submitted && !barangay &&
@@ -787,11 +807,17 @@ const mapStateToProps = state => ({
 	authenticatedOnRegister: state.auth.authenticatedOnRegister,
 	loading: state.auth.loading,
 	userId: state.auth.userId,
+	provinceData: state.mailing.provinces.data,
+	municipalityData: state.mailing.municipalities.data,
+	barangayData: state.mailing.barangays.data,
 })
 
 
 const mapDispatchToProps = dispatch => ({
-	doRegister: (username, password) => dispatch(doRegister(username, password))
+	doRegister: (username, password) => dispatch(doRegister(username, password)),
+	getProvince: () => dispatch(getProvince()),
+	getBarangay: () => dispatch(getBarangay()),
+	getMunicipality: () => dispatch(getMunicipality()),
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Register))
